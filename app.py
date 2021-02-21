@@ -22,7 +22,7 @@ mongo = PyMongo(app)
 
 def test():
     categories = mongo.db.Categories.find()
-    return render_template("index.html", categories=categories)
+    return render_template("base.html", categories=categories)
 
 
 if __name__ == "__main__":
