@@ -1,0 +1,15 @@
+.add-recipe-social-top {
+    background-color: #3c3c3c;
+    min-height: 45px;
+    padding: 0.7rem ;
+}
+
+.add-recipe-social-top i{
+    padding-right: 1rem; 
+    padding-left: 1rem;
+    font-size: 24px;
+}
+
+.menu-search{
+    width: 50%;
+}
