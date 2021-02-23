@@ -1,3 +1,4 @@
+  
 .add-recipe-social-top {
     background-color: #3c3c3c;
     min-height: 45px;
@@ -10,6 +11,23 @@
     font-size: 24px;
 }
 
+.nav-wrapper > .brand-logo {
+    padding-left: 10px;
+}
+
 .menu-search{
-    width: 50%;
+    width: 40%;
+    margin: 0 auto;
+    padding: 1rem ;
+}
+nav .input-field .search-icon{
+    top: -1rem;
+}
+
+.uppercase {
+    text-transform: uppercase;
+}
+/*  change slider indicator color*/
+.slider .indicators .indicator-item.active {
+  background-color: #ff9800;
 }

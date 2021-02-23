@@ -27,95 +27,265 @@
         </div>
         <!-- top navbar -->
 
-        <nav class="light-blue lighten-1">
+        <nav class="black">
             <div class="nav-wrapper">
-                <a href="#" class="brand-logo center">Nyama Cuisine</a>
+                <a href="#" class="brand-logo">Nyama Cuisine</a>
                 <a href="#" data-target="mobile-demo" class="sidenav-trigger right"><i class="fas fa-bars"></i></a>
-                <ul class="right hide-on-med-and-down">
-                    <li><a href="sass.html">Sass</a></li>
-                    <li><a href="badges.html">Components</a></li>
-                    <li><a href="collapsible.html">JavaScript</a></li>
+                <ul class="right hide-on-med-and-down uppercase">
+                    <li><a href="#">Recipes</a></li>
+                    <li><a href="#">Forum</a></li>
+                    <li><a href="#">Boutique</a></li>
                 </ul>
-                    <ul class="menu-search center">
-                        <li class="input-field">
-                            <input type="text" class="white grey-text" placeholder="search">
-                            <label class="label-icon" for="search"><i class="fas fa-search black-text"></i></label>  
-                        </li>
-                    </ul>
+                <form class="menu-search">
+                    <div class="input-field">
+                        <input id="search" type="search" class="white grey-text darken-2" placeholder="search">
+                        <label class="label-icon search-icon" for="search"><i class="fas fa-search grey-text darken-4"></i></label>
+                    </div>
+                </form>
             </div>
         </nav>
                 <!-- mobile sidenav -->
-                <ul id="mobile-demo" class="sidenav">
-                    <li><a href="sass.html">Sass</a></li>
-                    <li><a href="badges.html">Components</a></li>
-                    <li><a href="collapsible.html">JavaScript</a></li>
-                </ul>
-                
+                <ul id="mobile-demo" class="sidenav uppercase">
+                    <li><a href="#">Recipes</a></li>
+                    <li><a href="#">Forum</a></li>
+                    <li><a href="#">Boutique</a></li>
+                </ul> 
     </header>
 
     <!-- main page -->
     <main>
-        <div class="section no-pad-bot" id="index-banner">
+        <!-- slider section -->
+        <section class="slider">
+            <ul class="slides">
+                <li>
+                    <img src="{{ url_for('static', filename='/images/slider1.jpg') }}"> 
+                    <div class="caption center-align">
+                        <h3>This is our big Tagline!</h3>
+                        <h5 class="light grey-text text-lighten-3">Here's our small slogan.</h5>
+                    </div>
+                </li>
+                <li>
+                    <img src="{{ url_for('static', filename='/images/slider2.jpg') }}"> 
+                    <div class="caption left-align">
+                        <h3>Left Aligned Caption</h3>
+                        <h5 class="light grey-text text-lighten-3">Here's our small slogan.</h5>
+                    </div>
+                </li>
+                <li>
+                    <img src="{{ url_for('static', filename='/images/slider3.jpg') }}"> 
+                    <div class="caption right-align">
+                        <h3>Right Aligned Caption</h3>
+                        <h5 class="light grey-text text-lighten-3">Here's our small slogan.</h5>
+                    </div>
+                </li>
+                <li>
+                    <img src="{{ url_for('static', filename='/images/slider4.jpg') }}"> 
+                    <div class="caption center-align">
+                        <h3>This is our big Tagline!</h3>
+                        <h5 class="light grey-text text-lighten-3">Here's our small slogan.</h5>
+                    </div>
+                </li>
+            </ul>
+        </section>
+        <!-- last recipe -->
+        <section>
             <div class="container">
-                <br><br>
-                <h1 class="header center orange-text">Starter Template</h1>
-                <div class="row center">
-                    <h5 class="header col s12 light">A modern responsive front-end framework based on Material Design</h5>
-                </div>
-                <div class="row center">
-                    <a href="http://materializecss.com/getting-started.html" id="download-button"
-                        class="btn-large waves-effect waves-light orange">Get Started</a>
-                </div>
-                <br><br>
-    
-            </div>
-        </div>
-        {% for category in categories %}
-        {{ category.category_name }}
-        {% endfor %}
-        <div class="container">
-            <div class="section">
-    
-                <!--   Icon Section   -->
+                <h3 class="header center orange-text">Latest Recipe</h3>
+                <h5 class="header center light">Always more to discover</h5>
+                <br>
                 <div class="row">
                     <div class="col s12 m4">
-                        <div class="icon-block">
-                            <h2 class="center light-blue-text"><i class="material-icons">flash_on</i></h2>
-                            <h5 class="center">Speeds up development</h5>
-    
-                            <p class="light">We did most of the heavy lifting for you to provide a default stylings that
-                                incorporate our custom components. Additionally, we refined animations and transitions to
-                                provide a smoother experience for developers.</p>
+                        <div class="card">
+                            <div class="card-image">
+                                <img src="{{ url_for('static', filename='images/slider2.jpg') }}">
+                            </div>
+                            <div class="card-content">
+                                <h4 class="card-title">Card Title</h4>
+                                <p>I am a very simple card. I am good at containing small bits of information. </p>
+                            </div>
                         </div>
                     </div>
-    
                     <div class="col s12 m4">
-                        <div class="icon-block">
-                            <h2 class="center light-blue-text"><i class="material-icons">group</i></h2>
-                            <h5 class="center">User Experience Focused</h5>
-    
-                            <p class="light">By utilizing elements and principles of Material Design, we were able to create
-                                a framework that incorporates components and animations that provide more feedback to users.
-                                Additionally, a single underlying responsive system across all platforms allow for a more
-                                unified user experience.</p>
+                        <div class="card">
+                            <div class="card-image">
+                                <img src="{{ url_for('static', filename='images/slider1.jpg') }}">
+                            </div>
+                            <div class="card-content">
+                                <h4 class="card-title">Card Title</h4>
+                                <p>I am a very simple card. I am good at containing small bits of information. </p>
+                            </div>
                         </div>
                     </div>
-    
                     <div class="col s12 m4">
-                        <div class="icon-block">
-                            <h2 class="center light-blue-text"><i class="material-icons">settings</i></h2>
-                            <h5 class="center">Easy to work with</h5>
-    
-                            <p class="light">We have provided detailed documentation as well as specific code examples to
-                                help new users get started. We are also always open to feedback and can answer any questions
-                                a user may have about Materialize.</p>
+                        <div class="card">
+                            <div class="card-image">
+                                <img src="{{ url_for('static', filename='images/slider3.jpg') }}">
+                            </div>
+                            <div class="card-content">
+                                <h4 class="card-title">Card Title</h4>
+                                <p>I am a very simple card. I am good at containing small bits of information. </p>
+                            </div>
                         </div>
                     </div>
                 </div>
-    
             </div>
-            <br><br>
-        </div>
+        </section>
+        <!-- inspired recipe -->
+        <section>
+            <div class="container">
+                <h3 class="header center orange-text">Asian Inspired Recipe</h3>
+                <h5 class="header center light">Taste from around the world</h5>
+                <br>
+                <div class="row">
+                    <div class="col s12 m4">
+                        <div class="card">
+                            <div class="card-image">
+                                <img src="{{ url_for('static', filename='images/slider2.jpg') }}">
+                            </div>
+                            <div class="card-content">
+                                <h4 class="card-title">Card Title</h4>
+                                <p>I am a very simple card. I am good at containing small bits of information. </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col s12 m4">
+                        <div class="card">
+                            <div class="card-image">
+                                <img src="{{ url_for('static', filename='images/slider1.jpg') }}">
+                            </div>
+                            <div class="card-content">
+                                <h4 class="card-title">Card Title</h4>
+                                <p>I am a very simple card. I am good at containing small bits of information. </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col s12 m4">
+                        <div class="card">
+                            <div class="card-image">
+                                <img src="{{ url_for('static', filename='images/slider3.jpg') }}">
+                            </div>
+                            <div class="card-content">
+                                <h4 class="card-title">Card Title</h4>
+                                <p>I am a very simple card. I am good at containing small bits of information. </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- breakfast brunch recipe -->
+        <section>
+            <div class="container">
+                <h3 class="header center orange-text">Breakfast and Brunch</h3>
+                <h5 class="header center light">Wake up with smile</h5>
+                <br>
+                <div class="row">
+                    <div class="col s12 m3">
+                        <div class="card">
+                            <div class="card-image">
+                                <img src="{{ url_for('static', filename='images/slider2.jpg') }}">
+                            </div>
+                            <div class="card-content">
+                                <h4 class="card-title">Card Title</h4>
+                                <p>I am a very simple card. I am good at containing small bits of information. </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col s12 m3">
+                        <div class="card">
+                            <div class="card-image">
+                                <img src="{{ url_for('static', filename='images/slider2.jpg') }}">
+                            </div>
+                            <div class="card-content">
+                                <h4 class="card-title">Card Title</h4>
+                                <p>I am a very simple card. I am good at containing small bits of information. </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col s12 m3">
+                        <div class="card">
+                            <div class="card-image">
+                                <img src="{{ url_for('static', filename='images/slider1.jpg') }}">
+                            </div>
+                            <div class="card-content">
+                                <h4 class="card-title">Card Title</h4>
+                                <p>I am a very simple card. I am good at containing small bits of information. </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col s12 m3">
+                        <div class="card">
+                            <div class="card-image">
+                                <img src="{{ url_for('static', filename='images/slider3.jpg') }}">
+                            </div>
+                            <div class="card-content">
+                                <h4 class="card-title">Card Title</h4>
+                                <p>I am a very simple card. I am good at containing small bits of information. </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <br>
+            </div>
+        </section>
+        <!-- breakfast brunch caroussel -->
+        <!--
+        <section>
+            <div class="container">
+                <h3 class="header center orange-text">Breakfast and Brunch</h3>
+                <h5 class="header center light">Wake up with smile</h5>
+                <br>
+                <div class="carousel">
+                    <div class="carousel-item">
+                        <div class="card">
+                            <div class="card-image">
+                                <img src="{{ url_for('static', filename='images/slider1.jpg') }}">
+                            </div>
+                            <div class="card-content">
+                                <h4 class="card-title">Card Title</h4>
+                                <p>I am a very simple card. I am good at containing small bits of information. </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="carousel-item">
+                        <div class="card">
+                            <div class="card-image">
+                                <img src="{{ url_for('static', filename='images/slider2.jpg') }}">
+                            </div>
+                            <div class="card-content">
+                                <h4 class="card-title">Card Title</h4>
+                                <p>I am a very simple card. I am good at containing small bits of information. </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="carousel-item">
+                        <div class="card">
+                            <div class="card-image">
+                                <img src="{{ url_for('static', filename='images/slider3.jpg') }}">
+                            </div>
+                            <div class="card-content">
+                                <h4 class="card-title">Card Title</h4>
+                                <p>I am a very simple card. I am good at containing small bits of information. </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="carousel-item">
+                        <div class="card">
+                            <div class="card-image">
+                                <img src="{{ url_for('static', filename='images/slider4.jpg') }}">
+                            </div>
+                            <div class="card-content">
+                                <h4 class="card-title">Card Title</h4>
+                                <p>I am a very simple card. I am good at containing small bits of information. </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <br>
+        <br>
+        -->
     </main>
 
     <!-- footer -->
