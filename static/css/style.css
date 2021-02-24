@@ -31,3 +31,7 @@ nav .input-field .search-icon{
 .slider .indicators .indicator-item.active {
   background-color: #ff9800;
 }
+/* italic class */
+.italic {
+    font-style: italic;
+}

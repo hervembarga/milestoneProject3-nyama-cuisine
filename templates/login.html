@@ -2,10 +2,10 @@
     {% block content %}
     <section>
         <div class="container">
-            <h3 class="header center orange-text">Register</h3>
+            <h3 class="header center orange-text">Log In</h3>
             <br>
             <div class="row">
-                <form class="col s12 m8 offset-m2" method="POST" action="{{ url_for('register') }}">
+                <form class="col s12 m8 offset-m2" method="POST" action="{{ url_for('login') }}">
                     <div class="card-panel">
                         <!-- Username -->
                         <div class="row">
@@ -16,15 +16,7 @@
                                 <label for="username">Username</label>
                             </div>
                         </div>
-                        <!-- Email -->
-                        <div class="row">
-                            <div class="input-field col s12">
-                                <i class="fas fa-user-plus prefix grey-text text-darken-2"></i>
-                                <input id="email" name="email" type="text" pattern="^[a-zA-Z0-9]{5,15}$" class="validate"
-                                    required>
-                                <label for="username">E mail</label>
-                            </div>
-                        </div>
+                        
                         <!-- Password -->
                         <div class="row">
                             <div class="input-field col s12">
@@ -34,19 +26,10 @@
                                 <label for="password">Password</label>
                             </div>
                         </div>
-                        <!--  Confirm Password -->
-                        <div class="row">
-                            <div class="input-field col s12">
-                                <i class="fas fa-user-cog prefix grey-text text-darken-2"></i>
-                                <input id="confirm-password" name="password" type="password" minlength="5" maxlength="15"
-                                    pattern="^[a-zA-Z0-9]{5,15}$" class="validate" required>
-                                <label for="password">Confirm Password</label>
-                            </div>
-                        </div>
-                        <!-- Register -->
+                        <!-- Login -->
                         <div class="row">
                             <button type="submit" class="col s5 btn-large orange darken-3">
-                                Register <i class="fas fa-sign-in-alt"></i>
+                                Login <i class="fas fa-sign-in-alt"></i>
                             </button>
                             <a href="{{ url_for('index') }}" class="col s5 offset-s2 btn-large black-text grey lighten-2">
                                 Cancel <i class="fas fa-sign-out-alt"></i>
@@ -58,8 +41,8 @@
             <div class="row">
                 <div class="col s12">
                     <p class="center-align">
-                        Already Registered?
-                        <a href="{{ url_for('index') }}" class="orange-text text-darken-3 italic">Log In</a>
+                        New here?
+                        <a href="{{ url_for('register') }}" class="orange-text text-darken-3 italic">Register Account</a>
                     </p>
                     <br>
                 </div>

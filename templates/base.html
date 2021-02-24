@@ -18,7 +18,7 @@
         <div class="add-recipe-social-top hide-on-med-and-down">
             <div class="col right">
                 <a href=""><i class="fas fa-drumstick-bite"></i>Suggest a Recipe</a>
-                <a href=""><i class="fas fa-user"></i> MY ACCOUNT</a>
+                <a href="{{ url_for('profile', username=session['user']) }}"><i class="fas fa-user"></i> MY ACCOUNT</a>
                 <a href="https://www.youtube.com/" target="_blank"><i class="fab fa-youtube-square youtube"></i></a>
                 <a href="https://www.facebook.com/" target="_blank"><i class="fab fa-facebook-square facebook"></i></a>
                 <a href="https://www.instagram.com/" target="_blank"><i class="fab fa-instagram-square instagram"></i></a>
