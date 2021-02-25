@@ -88,6 +88,26 @@ def profile(username):
     return redirect(url_for("index"))
 
 
+@app.route("/suggest_recipe", methods=["GET", "POST"])
+def suggest_recipe():
+    if request.method == "POST":
+        username = mongo.db.Users.find_one(
+            {"username": session["user"]})["username"]
+        recipe = {
+            "recipe_name": request.form.get("recipe_name"),
+            "cooking_time": request.form.get("cooking_time"),
+            "category_name": request.form.get("category_name"),
+            "ingredient": request.form.get("ingredient"),
+            "step1": request.form.get("step1"),
+            "created_by": session["user"]
+        }
+        mongo.db.Recipes.insert_one(recipe)
+        flash("Task Successfully Added")
+        return redirect(url_for("profile", username=username))
+
+    return render_template("suggest-recipe.html")
+
+
 if __name__ == "__main__":
     app.run(host=os.environ.get("IP"),
             port=int(os.environ.get("PORT")),
