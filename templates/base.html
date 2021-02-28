@@ -15,7 +15,7 @@
 <body>
     <!-- header -->
     <header>
-        <div class="add-recipe-social-top hide-on-med-and-down">
+        <div class="add-recipe-social-top hide-on-small-and-down">
             <div class="col right">
                 <a href=""><i class="fas fa-drumstick-bite"></i>Suggest a Recipe</a>
                 <a href="{{ url_for('profile', username=session['user']) }}"><i class="fas fa-user"></i> MY ACCOUNT</a>
@@ -29,14 +29,14 @@
 
         <nav class="black">
             <div class="nav-wrapper">
-                <a href="#" class="brand-logo">Nyama Cuisine</a>
-                <a href="#" data-target="mobile-demo" class="sidenav-trigger right"><i class="fas fa-bars"></i></a>
+                <a href="{{url_for('index')}}" class="brand-logo">Nyama Cuisine</a>
+                <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="fas fa-bars"></i></a>
                 <ul class="right hide-on-med-and-down uppercase">
                     <li><a href="#">Recipes</a></li>
                     <li><a href="#">Forum</a></li>
                     <li><a href="#">Boutique</a></li>
                 </ul>
-                <form class="menu-search">
+                <form class="menu-search hide-on-med-and-down">
                     <div class="input-field">
                         <input id="search" type="search" class="white grey-text darken-2" placeholder="search">
                         <label class="label-icon search-icon" for="search"><i class="fas fa-search grey-text darken-4"></i></label>
@@ -50,6 +50,16 @@
                     <li><a href="#">Forum</a></li>
                     <li><a href="#">Boutique</a></li>
                 </ul> 
+                <!--
+                <div class="grey darken-3">
+                <form class="menu-search">
+                    <div class="input-field green">
+                        <input id="searc" type="search" class="white grey-text darken-2" placeholder="search">
+                        <label class="label-icon search-icon" for="search"><i class="fas fa-search grey-text darken-4"></i></label>
+                    </div>
+                </form>
+                </div>
+                -->
     </header>
      <section>
         <!--flash messages -->

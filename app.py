@@ -3,7 +3,9 @@ from flask import (
     Flask, flash, render_template,
     redirect, request, session, url_for)
 from flask_pymongo import PyMongo
+from datetime import date
 from bson.objectid import ObjectId
+from werkzeug.utils import secure_filename
 from werkzeug.security import generate_password_hash, check_password_hash
 if os.path.exists("env.py"):
     import env
@@ -14,8 +16,19 @@ app.config["MONGO_DBNAME"] = os.environ.get("MONGO_DBNAME")
 app.config["MONGO_URI"] = os.environ.get("MONGO_URI")
 app.secret_key = os.environ.get("SECRET_KEY")
 
+UPLOAD_FOLDER = 'static/images'
+app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024
+
+ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg', 'gif'])
 
 mongo = PyMongo(app)
+
+
+# allowed file
+def allowed_file(filename):
+    return '.' in filename and filename.rsplit(
+        '.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
 
 @app.route("/")
@@ -91,21 +104,31 @@ def profile(username):
 @app.route("/suggest_recipe", methods=["GET", "POST"])
 def suggest_recipe():
     if request.method == "POST":
-        username = mongo.db.Users.find_one(
-            {"username": session["user"]})["username"]
-        recipe = {
-            "recipe_name": request.form.get("recipe_name"),
-            "cooking_time": request.form.get("cooking_time"),
-            "category_name": request.form.get("category_name"),
-            "ingredient": request.form.get("ingredient"),
-            "step1": request.form.get("step1"),
-            "created_by": session["user"]
-        }
+        file = request.files['inputFile']
+        filename = secure_filename(file.filename)
+        if file and allowed_file(file.filename):
+            file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+            username = mongo.db.Users.find_one(
+                {"username": session["user"]})["username"]
+            recipe = {
+                "recipe_name": request.form.get("recipe_name"),
+                "cooking_time": request.form.get("cooking_time"),
+                "category_name": request.form.get("category_name"),
+                "inputFile": file.filename,
+                "ingredients": request.form.getlist("ingredients"),
+                "steps": request.form.getlist("steps"),
+                "submition_date": date.today(),
+                "created_by": session["user"]
+            }
         mongo.db.Recipes.insert_one(recipe)
-        flash("Task Successfully Added")
+        flash("Recipe Successfully Added")
         return redirect(url_for("profile", username=username))
-
-    return render_template("suggest-recipe.html")
+    categories = mongo.db.Categories.find().sort("category_name", 1)
+    cuisines = mongo.db.Cuisines.find().sort("cuisine_name", 1)
+    units = mongo.db.Units.find().sort("category_name", 1)
+    return render_template(
+        "suggest-recipe.html", categories=categories,
+        cuisines=cuisines, units=units)
 
 
 if __name__ == "__main__":

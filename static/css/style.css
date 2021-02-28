@@ -38,3 +38,14 @@ nav .input-field .search-icon{
 .flashes h4 {
     line-height: 2;
 }
+/* padding 20px */
+.padding10 {
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+.margin-bottom10 {
+    margin-bottom: 10px;
+}
+.strong{
+   font-weight: bold; 
+}

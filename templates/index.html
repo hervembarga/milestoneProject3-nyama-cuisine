@@ -126,7 +126,7 @@
                 <h5 class="header center light">Wake up with smile</h5>
                 <br>
                 <div class="row">
-                    <div class="col s12 m3">
+                    <div class="col s12 m6 l3">
                         <div class="card">
                             <div class="card-image">
                                 <img src="{{ url_for('static', filename='images/slider2.jpg') }}">
@@ -137,7 +137,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col s12 m3">
+                    <div class="col s12 m6 l3">
                         <div class="card">
                             <div class="card-image">
                                 <img src="{{ url_for('static', filename='images/slider2.jpg') }}">
@@ -148,7 +148,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col s12 m3">
+                    <div class="col s12 m6 l3">
                         <div class="card">
                             <div class="card-image">
                                 <img src="{{ url_for('static', filename='images/slider1.jpg') }}">
@@ -159,7 +159,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col s12 m3">
+                    <div class="col s12 m6 l3">
                         <div class="card">
                             <div class="card-image">
                                 <img src="{{ url_for('static', filename='images/slider3.jpg') }}">
@@ -172,6 +172,16 @@
                     </div>
                 </div>
                 <br>
+                <div class="row">
+                    <h5 class="center green padding10 grey lighten-1 margin-bottom10 white-text">Category</h5>
+                    <div class="input-field col s12">
+                
+                        {% for category in categories %}
+                        <p> {{ category.category_name }} </p>
+                        {% endfor %}
+                
+                    </div>
+                </div>
             </div>
         </section>
         <!-- breakfast brunch caroussel -->
@@ -232,4 +242,7 @@
         <br>
         <br>
         -->
+        
+
+
     {% endblock %}

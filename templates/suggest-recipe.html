@@ -5,50 +5,148 @@
             <h3 class="header center orange-text">My recipe suggestion</h3>
             <br>
             <div class="row">
-                <form class="col s12 m8 offset-m2" method="POST" action="{{ url_for('suggest_recipe') }}">
+                <form class="col s12 m10 offset-m1" method="POST" enctype="multipart/form-data" action="{{ url_for('suggest_recipe') }}">
                     <div class="card-panel">
                         <!-- Recipe name -->
                         <div class="row">
+                            <h5 class="center padding10 grey lighten-1 margin-bottom10 white-text">Recipe name</h5>
                             <div class="input-field col s12">
                                 <i class="fas fa-bread-slice prefix grey-text text-darken-2"></i>
                                 <input id="recipe_name" name="recipe_name" type="text" minlength="5" maxlength="60" class="validate" required>
                                 <label for="recipe_name">Recipe name</label>
                             </div>
                         </div>
+                        
+                        <div class="row">
+                            <!-- yields -->
+                            <div class="input-field col s8 m4">
+                                <i class="fas fa-users prefix grey-text text-darken-2"></i>
+                                <input id="serving" name="serving" type="text" pattern="^[0-9]{1,3}$" minlength="1" maxlength="3" placeholder="ex: 6" class="validate" required>
+                                <label for="serving">servings</label>
+                            </div>
+                            <div class="input-field prefix col s4 m2">
+                                <p>Servings</p>
+                            </div>
+                            <!-- upload image -->
+                                <div class="file-field input-field col s12 m6">
+                                    <i class="fas fa-camera center prefix grey-text text-darken-2"></i>
+                                    <div class="btn-large transparent">
+                                        <input type="file" name="inputFile"  required>
+                                    </div>
+                                    <div class="file-path-wrapper">
+                                        <input class="file-path validate" type="text" placeholder="Upload a photo">
+                                    </div>
+                                </div>
+                        </div>
                         <!-- time -->
                         <div class="row">
-                            <div class="input-field col s12">
-                                <i class="fas fa-bread-slice prefix grey-text text-darken-2"></i>
-                                <input id="cooking_time" name="cooking_time" type="text" minlength="5" maxlength="60" class="validate" required>
+                            <h5 class="center green padding10 grey lighten-1 margin-bottom10 white-text">Time</h5>
+                        </div>
+                        <div class="row">
+                            <div class="input-field col s8 l4">
+                                <i class="far fa-clock prefix grey-text text-darken-2"></i>
+                                <input id="prep_time" name="prep_time" type="number" min="0" max="1500" class="validate" required>
+                                <label for="prep_time">preparation time</label>
+                            </div>
+                            <div class="input-field prefix col s4 l2">
+                                <p>Minutes</p>
+                            </div>
+                            <div class="input-field col s8 l4">
+                                <i class="fas fa-fire-alt prefix grey-text text-darken-2"></i>
+                                <input id="cooking_time" name="cooking_time" type="number" min="0" max="1500" class="validate" required>
                                 <label for="cooking_time">cooking time</label>
+                            </div>
+                            <div class="input-field prefix col s4 l2">
+                                <p>Minutes</p>
                             </div>
                         </div>
                         <!-- categories -->
                         <div class="row">
+                            <h5 class="center green padding10 grey lighten-1 margin-bottom10 white-text">Category</h5>
                             <div class="input-field col s12">
-                                <i class="fas fa-bread-slice prefix grey-text text-darken-2"></i>
-                                <input id="category_name" name="category_name" type="text" minlength="5" maxlength="60" class="validate" required>
+                                <i class="fas fa-folder-open prefix grey-text text-darken-2"></i>
+                                <select id="category_name" name="category_name" class="validate" required>
+                                    <option value="" disabled selected>Categories</option>
+                                    {% for category in categories %}
+                                    <option value="{{ category.category_name }}">{{ category.category_name }}</option>
+                                    {% endfor %}
+                                </select>
                                 <label for="category_name">Category</label>
+                                <br>
+                            </div>
+                        </div>
+                        <!-- cuisines -->
+                        <div class="row">
+                            <h5 class="center green padding10 grey lighten-1 margin-bottom10 white-text">Cuisine</h5>
+                            <div class="input-field col s12">
+                                <i class="fas fa-utensils prefix grey-text text-darken-2"></i>
+                                <select id="cuisine_name" name="cuisine_name" class="validate" required>
+                                    <option value="" disabled selected>Cuisines</option>
+                                    {% for cuisine in cuisines %}
+                                    <option value="{{ cuisine.cuisine_name }}">{{ cuisine.cuisine_name}}</option> 
+                                    {% endfor %}
+                                </select>
+                                <label for="cuisine_name">Cuisine</label>
+                                <br>
                             </div>
                         </div>
                         <!-- Ingredients -->
-                        <div class="row">
-                            <div class="input-field col s12">
-                                <i class="fas fa-user-plus prefix grey-text text-darken-2"></i>
-                                <input id="ingredient" name="ingredient" type="text" class="validate"
-                                    required>
-                                <label for="ingredient">Ingredient</label>
+                        <div id="ingredientList">
+                            <div class="row fieldGroup">
+                                <h5 class="center padding10 grey lighten-1 margin-bottom10 white-text">Ingredients</h5>
+                                <div class="input-field col m6 l2">
+                                    <input id="quantity1" name="quantity" type="text" placeholder="ex: 3" maxlength="5" class="validate"
+                                        required>
+                                    <label for="quantity">Quantity </label>
+                                </div>
+
+                                <div class="input-field col m6 l3">
+                                    <select id="unit1" name="unit" class="validate" required>
+                                        <option value="" disabled selected>Units</option>
+                                        {% for unit in units %}
+                                        <option value="{{ unit.unit }}">{{ unit.unit}}</option>
+                                        {% endfor %}
+                                    </select>
+                                    <label for="unit">Unit</label>
+                                    <br>
+                                </div>
+                                <div class="input-field col m9 l5">
+                                    <i class="fas fa-carrot prefix grey-text text-darken-2"></i>
+                                    <input id="ingredient1" name="ingredients" type="text" placeholder="Ingredient" class="validate"
+                                        required>
+                                    <label for="ingredients">ingredients </label>
+                                </div>
                             </div>
                         </div>
+                        <div id="addIngredient" class="btn green darken-2">add ingredient</div>
+                        
                         <!-- preparation -->
-                        <div class="row">
-                            <div class="input-field col s12">
-                                <i class="fas fa-user-plus prefix grey-text text-darken-2"></i>
-                                <input id="step1" name="step1" type="text" class="validate"
-                                    required>
-                                <label for="step1">Step1</label>
+                        <div id="stepList">
+                            <div class="row fieldGroup">
+                                <h5 class="center padding10 grey lighten-1 margin-bottom10 white-text">Preparation</h5>
+                                <div class="input-field col s9">
+                                    <i class="fas fa-book-reader prefix grey-text text-darken-2"></i>
+                                    <textarea id="step1" name="steps" minlength="15" maxlength="300" placeholder="preparation step" class="validate materialize-textarea" required></textarea>
+                                    <label for="steps">steps </label>
+                                </div>
                             </div>
                         </div>
+                        <div id="addStep" class="btn green darken-2">add a step</div>
+                        <br><br>
+                        <!-- notes -->
+                        <div id="noteList">
+                            <div class="row fieldGroup">
+                                <h5 class="center padding10 grey lighten-1 margin-bottom10 white-text">Notes</h5>
+                                <div class="input-field col s9">
+                                    <i class="fas fa-comment-dots prefix grey-text text-darken-2"></i>
+                                    <textarea id="note1" name="notes" minlength="15" maxlength="300" placeholder="note" class="validate materialize-textarea" required></textarea>
+                                    <label for="notes">notes </label>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="addNote" class="btn green darken-2">add a note</div>
+                        <br><br><br><br>
+
                         <!-- Suggest -->
                         <div class="row">
                             <button type="submit" class="col s5 btn-large orange darken-3">
@@ -63,4 +161,45 @@
             </div>
         </div>
     </section>
+        {% block scripts %}
+        <script>
+            var loadFile = function (event) {
+                var output = document.getElementById('output');
+                output.src = URL.createObjectURL(event.target.files[0]);
+                output.onload = function () {
+                    URL.revokeObjectURL(output.src)
+                }
+            };
+        </script>
+        <script>
+            //add ingredients to the list
+    $("#addIngredient").click(function(){
+        if (ingredientCount <= maxIngredients){
+            $("#ingredientList").append(`<div class="row fieldGroup">
+                <div class="input-field col m6 l2">
+                    <input id="quantity${ingredientCount}" name="quantity" type="text" placeholder="ex: 3" maxlength="5" class="validate"
+                        required>
+                </div>
+                <div class="input-field col m6 l3">
+                 <select id="unit1" name="unit" class="validate" required>
+                                        <option value="" disabled selected>Units</option>
+                                        {% for unit in units %}
+                                        <option value="{{ unit.unit }}">{{ unit.unit}}</option>
+                                        {% endfor %}
+                                    </select>
+                                    <label for="unit">Unit</label>
+                                    <br>  
+                </div>
+                <div class="input-field col m9 l5">
+                    <i class="fas fa-carrot prefix grey-text text-darken-2"></i>
+                    <input id="ingredient${ingredientCount}" name="ingredients" type="text" placeholder="Ingredient" class="validate"
+                            required>
+                </div>
+                 <br>
+                <div class="btn red remove col l2">X</div>
+            </div>`);
+            ingredientCount++;
+        }
+        </script>
+        {% endblock %}
     {% endblock %}
