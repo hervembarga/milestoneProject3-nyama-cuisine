@@ -1,11 +1,12 @@
 $(document).ready(function(){
     $(".sidenav").sidenav();
     $('.slider').slider();
+    $("select").formSelect();
     $('.carousel').carousel({
         dist: 0,
         shift: 20});
-
-    validateMaterializeSelect();
+        
+   validateMaterializeSelect();
     function validateMaterializeSelect() {
         let classValid = { "border-bottom": "1px solid #4caf50", "box-shadow": "0 1px 0 0 #4caf50" };
         let classInvalid = { "border-bottom": "1px solid #f44336", "box-shadow": "0 1px 0 0 #f44336" };
@@ -32,43 +33,44 @@ $(document).ready(function(){
             }
         });
     }
-
-        //ingredients group add limit
-    var maxIngredients = 15;
-    var ingredientCount = 2;
     
-    //add ingredients to the list
-    $("#addIngredient").click(function(){
-        if (ingredientCount <= maxIngredients){
-            $("#ingredientList").append(`<div class="row fieldGroup">
-                <div class="input-field col m6 l2">
-                    <input id="quantity${ingredientCount}" name="quantity" type="text" placeholder="ex: 3" maxlength="5" class="validate"
-                        required>
-                </div>
-                <div class="input-field col m6 l3">
-                 <select id="unit1" name="unit" class="validate" required>
-                                        <option value="" disabled selected>Units</option>
+          //ingredients group add limit
+       /*
+          var fieldGroupCopy =`<div class="input-field col s6 l2">
+                                <input name="quantity" type="text" placeholder="ex: 3" maxlength="5"
+                                    class="validate" >
+                            </div>
+                            <div class="input-field col s6 l3 ">
+                                    <select  name="unit" class="browser-default validate unit" >
+                                        <option value="" disabled selected >Units</option>
                                         {% for unit in units %}
-                                        <option value="{{ unit.unit }}">{{ unit.unit}}</option>
-                                        {% endfor %}
+                                            <option class="press"  value="{{unit.unit}}">{{unit.unit}}</option>
+                                            {% endfor %}
                                     </select>
-                                    <label for="unit">Unit</label>
-                                    <br>  
-                </div>
-                <div class="input-field col m9 l5">
-                    <i class="fas fa-carrot prefix grey-text text-darken-2"></i>
-                    <input id="ingredient${ingredientCount}" name="ingredients" type="text" placeholder="Ingredient" class="validate"
-                            required>
-                </div>
-                 <br>
-                <div class="btn red remove col l2">X</div>
-            </div>`);
-            ingredientCount++;
-        }
-    });
+                                    <br>
+                            </div>
+                            <div class="input-field col s9 l5">
+                                <i class="fas fa-carrot prefix grey-text text-darken-2"></i>
+                                <input id="ingredient2" name="ingredients" type="text" placeholder="Ingredient"
+                                    class="validate" required>
+                            </div>
+                            <br>
+                            <div class="btn red remove col s2"><i class="fas fa-minus"></i></div>`;
+        */
+        var i = 0;
+        var maxGroup = 25;
+        $(".addIngredient").click(function(){
+            if($('body').find('.fieldGroup1').length < maxGroup){
+                var fieldHTML = '<div class="row fieldGroup1">'+$('.fieldGroupCopy').html()+'</div>';
+                $('body').find('.fieldGroup1:last').after(fieldHTML);
+                i++;
+            }
+            });
+
+    
 
         //preparation group add limit
-    var maxSteps = 15;
+    var maxSteps = 25;
     var stepCount = 2;
     
     //add steps to the list
@@ -91,7 +93,7 @@ $(document).ready(function(){
     
     //add steps to the list
     $("#addNote").click(function(){
-        if (stepCount <= maxNotes){
+        if (noteCount <= maxNotes){
             $("#noteList").append(`<div class="row fieldGroup">
             <div class="input-field col s9">
                     <i class="fas fa-comment-dots prefix grey-text text-darken-2"></i>
@@ -103,16 +105,16 @@ $(document).ready(function(){
         }
     });
 
-    
-    
     //remove fields group
     $("body").on("click",".remove",function(){ 
         $(this).parents(".fieldGroup").remove();
-        ingredientCount--;
+        noteCount--;
     });
-
-   
-
-    $("select").formSelect();
+    // remove group
+        $("body").on("click",".remove",function(){ 
+        $(this).parents(".fieldGroup1").remove();
+        ingredientCount--;
+        });
     
+
   });

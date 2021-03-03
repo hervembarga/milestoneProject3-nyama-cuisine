@@ -92,37 +92,62 @@
                         </div>
                         <!-- Ingredients -->
                         <div id="ingredientList">
-                            <div class="row fieldGroup">
+                            <div class="row fieldGroup1">
                                 <h5 class="center padding10 grey lighten-1 margin-bottom10 white-text">Ingredients</h5>
-                                <div class="input-field col m6 l2">
-                                    <input id="quantity1" name="quantity" type="text" placeholder="ex: 3" maxlength="5" class="validate"
-                                        required>
+                                <div class="input-field col s6 l2">
+                                    <input name="quantity" type="text" placeholder="ex: 3" maxlength="5" class="validate">
                                     <label for="quantity">Quantity </label>
                                 </div>
 
-                                <div class="input-field col m6 l3">
-                                    <select id="unit1" name="unit" class="validate" required>
+                                <div class="input-field col s6 l3">
+                                    <select name="unit" class="validate unit">
                                         <option value="" disabled selected>Units</option>
                                         {% for unit in units %}
                                         <option value="{{ unit.unit }}">{{ unit.unit}}</option>
                                         {% endfor %}
                                     </select>
-                                    <label for="unit">Unit</label>
+                                    <label for="unit">Units</label>
                                     <br>
                                 </div>
-                                <div class="input-field col m9 l5">
+                                <div class="input-field col s9 l5">
                                     <i class="fas fa-carrot prefix grey-text text-darken-2"></i>
                                     <input id="ingredient1" name="ingredients" type="text" placeholder="Ingredient" class="validate"
                                         required>
                                     <label for="ingredients">ingredients </label>
                                 </div>
+                                <div id="" class="btn green darken-2 col s2 addIngredient"><i class="fas fa-plus"></i></div>
                             </div>
                         </div>
-                        <div id="addIngredient" class="btn green darken-2">add ingredient</div>
                         
+                        <!-- copy of fieldGroup -->
+                        <div class="row fieldGroupCopy" style="display: none;">
+                            <div class="input-field col s6 l2">
+                                <input name="quantity" type="text" placeholder="ex: 3" maxlength="5"
+                                    class="validate" >
+                            </div>
+                            <div class="input-field col s6 l3 ">
+                                    <select  name="unit" class="validate unit" >
+                                        <option value="" disabled selected >Units</option>
+                                        {% for unit in units %}
+                                            <option  value="{{unit.unit}}">{{unit.unit}}</option>
+                                        {% endfor %}
+                                    </select>
+                                    <br>
+                            </div>
+                            <div class="input-field col s9 l5">
+                                <i class="fas fa-carrot prefix grey-text text-darken-2"></i>
+                                <input id="ingredient2" name="ingredients" type="text" placeholder="Ingredient"
+                                    class="validate" required>
+                            </div>
+                            <br>
+                            <div class="btn red remove col s2"><i class="fas fa-minus"></i></div>
+                        </div>
+                        
+                         
+                     <!---->  
                         <!-- preparation -->
-                        <div id="stepList">
-                            <div class="row fieldGroup">
+                        <div id="stepList" class="press">
+                                <div class="row fieldGroup">
                                 <h5 class="center padding10 grey lighten-1 margin-bottom10 white-text">Preparation</h5>
                                 <div class="input-field col s9">
                                     <i class="fas fa-book-reader prefix grey-text text-darken-2"></i>
@@ -170,36 +195,47 @@
                     URL.revokeObjectURL(output.src)
                 }
             };
+
+        
+    
         </script>
         <script>
-            //add ingredients to the list
-    $("#addIngredient").click(function(){
-        if (ingredientCount <= maxIngredients){
-            $("#ingredientList").append(`<div class="row fieldGroup">
-                <div class="input-field col m6 l2">
-                    <input id="quantity${ingredientCount}" name="quantity" type="text" placeholder="ex: 3" maxlength="5" class="validate"
-                        required>
-                </div>
-                <div class="input-field col m6 l3">
-                 <select id="unit1" name="unit" class="validate" required>
-                                        <option value="" disabled selected>Units</option>
+
+            
+/*
+          //ingredients group add limit
+        var fieldGroupCopy =`<div class="input-field col s6 l2">
+                                <input name="quantity" type="text" placeholder="ex: 3" maxlength="5"
+                                    class="validate" >
+                            </div>
+                            <div class="input-field col s6 l3 ">
+                                    <select  name="unit" class="browser-default validate unit" >
+                                        <option value="" disabled selected >Units</option>
                                         {% for unit in units %}
-                                        <option value="{{ unit.unit }}">{{ unit.unit}}</option>
-                                        {% endfor %}
+                                            <option class="press"  value="{{unit.unit}}">{{unit.unit}}</option>
+                                            {% endfor %}
                                     </select>
-                                    <label for="unit">Unit</label>
-                                    <br>  
-                </div>
-                <div class="input-field col m9 l5">
-                    <i class="fas fa-carrot prefix grey-text text-darken-2"></i>
-                    <input id="ingredient${ingredientCount}" name="ingredients" type="text" placeholder="Ingredient" class="validate"
-                            required>
-                </div>
-                 <br>
-                <div class="btn red remove col l2">X</div>
-            </div>`);
-            ingredientCount++;
-        }
+                                    <br>
+                            </div>
+                            <div class="input-field col s9 l5">
+                                <i class="fas fa-carrot prefix grey-text text-darken-2"></i>
+                                <input id="ingredient2" name="ingredients" type="text" placeholder="Ingredient"
+                                    class="validate" required>
+                            </div>
+                            <br>
+                            <div class="btn red remove col s2"><i class="fas fa-minus"></i></div>`;
+
+        var i = 0;
+        var maxGroup = 25;
+        $(".addIngredient").click(function(){
+            if($('body').find('.fieldGroup1').length < maxGroup){
+                var fieldHTML = '<div class="row fieldGroup1">'+fieldGroupCopy+'</div>';
+                $('body').find('.fieldGroup1:last').after(fieldHTML);
+                i++;
+            }
+            });
+
+    */
         </script>
         {% endblock %}
     {% endblock %}

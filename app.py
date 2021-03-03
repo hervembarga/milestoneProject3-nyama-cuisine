@@ -1,9 +1,10 @@
 import os
 from flask import (
-    Flask, flash, render_template,
+    Flask, flash, render_template, json,
     redirect, request, session, url_for)
 from flask_pymongo import PyMongo
-from datetime import date
+import datetime
+from bson import json_util
 from bson.objectid import ObjectId
 from werkzeug.utils import secure_filename
 from werkzeug.security import generate_password_hash, check_password_hash
@@ -72,7 +73,8 @@ def login():
 
         if existing_user:
             # ensure hashed password matches user input
-            if check_password_hash(existing_user["password"], request.form.get("password")):
+            if check_password_hash(existing_user["password"],
+                request.form.get("password")):
                 session["user"] = request.form.get("username").lower()
                 flash("Welcome, {}".format(
                     request.form.get("username")))
@@ -110,22 +112,42 @@ def suggest_recipe():
             file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
             username = mongo.db.Users.find_one(
                 {"username": session["user"]})["username"]
+
+            time = {
+                "prep_time": request.form.get("prep_time"),
+                "cooking_time": request.form.get("cooking_time")
+            }
+            amounts = {
+                "quantity": request.form.get("quantity"),
+                "unit": request.form.get("unit")
+            }
+            ingredient = {
+                request.form.get("ingredients"): {"amounts": [amounts]}
+            }
+            '''
+            lenght = len(request.form.getlist("quantity"))
+            '''
+            today = datetime.datetime.now()
             recipe = {
                 "recipe_name": request.form.get("recipe_name"),
-                "cooking_time": request.form.get("cooking_time"),
-                "category_name": request.form.get("category_name"),
+                "serving": request.form.get("serving"),
                 "inputFile": file.filename,
-                "ingredients": request.form.getlist("ingredients"),
+                "time": time,
+                "category_name": request.form.get("category_name"),
+                "cuisine_name": request.form.get("cuisine_name"),
+                "ingredients": ingredient,
                 "steps": request.form.getlist("steps"),
-                "submition_date": date.today(),
+                "notes": request.form.getlist("notes"),
+                "submission_date": today,
                 "created_by": session["user"]
             }
-        mongo.db.Recipes.insert_one(recipe)
+        mongo.db.Recipes.insert(recipe)
         flash("Recipe Successfully Added")
         return redirect(url_for("profile", username=username))
+
     categories = mongo.db.Categories.find().sort("category_name", 1)
     cuisines = mongo.db.Cuisines.find().sort("cuisine_name", 1)
-    units = mongo.db.Units.find().sort("category_name", 1)
+    units = list(mongo.db.Units.find().sort("unit", 1))
     return render_template(
         "suggest-recipe.html", categories=categories,
         cuisines=cuisines, units=units)
