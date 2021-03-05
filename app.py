@@ -4,6 +4,7 @@ from flask import (
     redirect, request, session, url_for)
 from flask_pymongo import PyMongo
 import datetime
+import itertools
 from bson import json_util
 from bson.objectid import ObjectId
 from werkzeug.utils import secure_filename
@@ -103,46 +104,68 @@ def profile(username):
     return redirect(url_for("index"))
 
 
+
+
 @app.route("/suggest_recipe", methods=["GET", "POST"])
 def suggest_recipe():
     if request.method == "POST":
+        username = mongo.db.Users.find_one(
+                {"username": session["user"]})["username"]
         file = request.files['inputFile']
         filename = secure_filename(file.filename)
         if file and allowed_file(file.filename):
             file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-            username = mongo.db.Users.find_one(
-                {"username": session["user"]})["username"]
+            
 
-            time = {
-                "prep_time": request.form.get("prep_time"),
-                "cooking_time": request.form.get("cooking_time")
-            }
-            amounts = {
-                "quantity": request.form.get("quantity"),
-                "unit": request.form.get("unit")
-            }
-            ingredient = {
-                request.form.get("ingredients"): {"amounts": [amounts]}
-            }
-            '''
-            lenght = len(request.form.getlist("quantity"))
-            '''
-            today = datetime.datetime.now()
-            recipe = {
-                "recipe_name": request.form.get("recipe_name"),
-                "serving": request.form.get("serving"),
-                "inputFile": file.filename,
-                "time": time,
-                "category_name": request.form.get("category_name"),
-                "cuisine_name": request.form.get("cuisine_name"),
-                "ingredients": ingredient,
-                "steps": request.form.getlist("steps"),
-                "notes": request.form.getlist("notes"),
-                "submission_date": today,
-                "created_by": session["user"]
-            }
+        time = [
+            {"prep_time": request.form.get("prep_time")},
+            {"cooking_time": request.form.get("cooking_time")
+        }]
+
+        ingred = request.form.getlist("ingredients")
+        quantity = request.form.getlist("quantity")
+        unit = request.form.getlist("unit")
+        ingredients =[]
+        for (i, q, u) in itertools.zip_longest(ingred, quantity, unit):
+            if q == "":
+                ingredients.append({"ingredient": i,
+                    "quantity": "",
+                    "unit": u
+                    })
+            elif u == "":
+                ingredients.append({"ingredient": i,
+                    "quantity": q,
+                    "unit": ""
+                    }) 
+            elif u == "" and q == "":
+                ingredients.append({"ingredient": i,
+                    "quantity": "",
+                    "unit": ""
+                    }) 
+            else:
+                ingredients.append({"ingredient": i,
+                    "quantity": q,
+                    "unit": u
+                    })
+
+        today = datetime.datetime.now()
+        recipe = {
+            "recipe_name": request.form.get("recipe_name"),
+            "serving": request.form.get("serving"),
+            "inputFile": file.filename,
+            "time": time,
+            "category_name": request.form.get("category_name"),
+            "cuisine_name": request.form.get("cuisine_name"),
+            "ingredients": ingredients,
+            "steps": request.form.getlist("steps"),
+            "notes": request.form.getlist("notes"),
+            "submission_date": today,
+            "created_by": session["user"]
+        }
+        
         mongo.db.Recipes.insert(recipe)
         flash("Recipe Successfully Added")
+        
         return redirect(url_for("profile", username=username))
 
     categories = mongo.db.Categories.find().sort("category_name", 1)
@@ -151,6 +174,21 @@ def suggest_recipe():
     return render_template(
         "suggest-recipe.html", categories=categories,
         cuisines=cuisines, units=units)
+
+
+@app.route("/form_test", methods=["GET", "POST"])
+def form_test():
+
+    if request.method == "POST":
+
+        req = request.form
+        print(req.getlist("quantity"))
+        print(req.getlist("unit"))
+        print(req.getlist("ingredients"))
+
+        return redirect(request.url)
+
+    return render_template("form_test.html")
 
 
 if __name__ == "__main__":

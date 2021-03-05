@@ -1,0 +1,140 @@
+    {% extends "base.html" %}
+    {% block content %}
+    <section>
+        <div class="container">
+            <h3 class="header center orange-text">My recipe suggestion</h3>
+            <br>
+            <div class="row">
+                <form class="col s12 m10 offset-m1" method="POST" enctype="multipart/form-data" action="{{ url_for('form_test') }}">
+                    <div class="card-panel">
+                        <!-- Recipe name -->
+                        <div class="row">
+                            <h5 class="center padding10 grey lighten-1 margin-bottom10 white-text">Recipe name</h5>
+                            <div class="input-field col s12">
+                                <i class="fas fa-bread-slice prefix grey-text text-darken-2"></i>
+                                <input id="recipe_name" name="recipe_name" type="text" minlength="5" maxlength="60" class="validate" >
+                                <label for="recipe_name">Recipe name</label>
+                            </div>
+                        </div>
+                        
+                        <!-- Ingredients -->
+                        <div id="ingredientList">
+                            <div class="row fieldGroup1">
+                                <h5 class="center padding10 grey lighten-1 margin-bottom10 white-text">Ingredients</h5>
+                                <div class="input-field col s6 l2">
+                                    <input value="" name="quantity" type="text" placeholder="ex: 3" maxlength="5" class="validate">
+                                    <label for="quantity">Quantity </label>
+                                </div>
+
+                                <div class="input-field col s6 l3">
+                                    <select name="unit" class="validate unit" >
+                                        <option value=""  selected>Units</option>
+                                        <option value="kg">Kg</option>
+                                        <option  value="lb">lb</option>
+                                        <option value="ml">ml</option>
+                                        <option value="oz">oz</option>
+                                    </select>
+                                    <label for="unit">Units</label>
+                                    <br>
+                                </div>
+                                <div class="input-field col s9 l5">
+                                    <i class="fas fa-carrot prefix grey-text text-darken-2"></i>
+                                    <input id="ingredient1" name="ingredients" type="text" placeholder="Ingredient" class="validate">
+                                    <label for="ingredients">ingredients </label>
+                                </div>
+                                <div id="" class="btn green darken-2 col s2 addIngredient"><i class="fas fa-plus"></i></div>
+                            </div>
+                        </div>
+                        
+                        <!-- copy of fieldGroup -->
+                        <div class="row fieldGroupCopy" style="display: none;"></div>
+                        
+                         
+                     <!---->  
+                        <!-- preparation -->
+                        <div id="stepList" class="press">
+                                <div class="row fieldGroup">
+                                <h5 class="center padding10 grey lighten-1 margin-bottom10 white-text">Preparation</h5>
+                                <div class="input-field col s9">
+                                    <i class="fas fa-book-reader prefix grey-text text-darken-2"></i>
+                                    <textarea id="step1" name="steps" minlength="15" maxlength="300" placeholder="preparation step" class="validate materialize-textarea" ></textarea>
+                                    <label for="steps">steps </label>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="addStep" class="btn green darken-2">add a step</div>
+                        <br><br>
+                        <br><br>
+
+                        <!-- Suggest -->
+                        <div class="row">
+                            <button type="submit" class="col s5 btn-large orange darken-3">
+                                Suggest <i class="fas fa-paper-plane"></i>
+                            </button>
+                            <a href="{{ url_for('index') }}" class="col s5 offset-s2 btn-large black-text grey lighten-2">
+                                Cancel <i class="fas fa-sign-out-alt"></i>
+                            </a>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+        {% block scripts %}
+        <script>
+            var loadFile = function (event) {
+                var output = document.getElementById('output');
+                output.src = URL.createObjectURL(event.target.files[0]);
+                output.onload = function () {
+                    URL.revokeObjectURL(output.src)
+                }
+            };
+
+        
+    
+        </script>
+        <script>
+
+ //ingredients group add limit
+       
+          var fieldGroupCopy =`<div class="input-field col s6 l2">
+                                <input value="" name="quantity" type="text" placeholder="ex: 3" maxlength="5"
+                                    class="validate" >
+                            </div>
+                            <div class="input-field col s6 l3 ">
+                                    <select name="unit" class="browser-default validate unit">
+                                        <option value="" disable selected>Units</option>
+                                        <option value="kg">Kg</option>
+                                        <option value="lb">lb</option>
+                                        <option value="ml">ml</option>
+                                        <option value="oz">oz</option>
+                                    </select>
+                                    <br>
+                            </div>
+                            <div class="input-field col s9 l5">
+                                <i class="fas fa-carrot prefix grey-text text-darken-2"></i>
+                                <input id="ingredient${i}" name="ingredients" type="text" placeholder="Ingredient"
+                                    class="validate" >
+                            </div>
+                            <br>
+                            <div class="btn red remove col s2"><i class="fas fa-minus"></i></div>`;
+        
+        var i = 0;
+        var maxGroup = 25;
+        $(".addIngredient").click(function(){
+            if($('body').find('.fieldGroup1').length < maxGroup){
+                var fieldHTML = '<div class="row fieldGroup1">'+fieldGroupCopy+'</div>';
+                $('body').find('.fieldGroup1:last').after(fieldHTML);
+                i++;
+            }
+            });
+             // remove group
+        $("body").on("click",".remove",function(){ 
+        $(this).parents(".fieldGroup1").remove();
+        ingredientCount--;
+        });
+
+            console.log({{listFromForm|safe}});
+        </script>
+        {% endblock %}
+    {% endblock %}

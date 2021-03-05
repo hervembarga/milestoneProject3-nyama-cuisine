@@ -95,13 +95,13 @@
                             <div class="row fieldGroup1">
                                 <h5 class="center padding10 grey lighten-1 margin-bottom10 white-text">Ingredients</h5>
                                 <div class="input-field col s6 l2">
-                                    <input name="quantity" type="text" placeholder="ex: 3" maxlength="5" class="validate">
+                                    <input value="" name="quantity" type="text" placeholder="ex: 3" maxlength="5" class="validate">
                                     <label for="quantity">Quantity </label>
                                 </div>
 
                                 <div class="input-field col s6 l3">
                                     <select name="unit" class="validate unit">
-                                        <option value="" disabled selected>Units</option>
+                                        <option value="" selected>Units</option>
                                         {% for unit in units %}
                                         <option value="{{ unit.unit }}">{{ unit.unit}}</option>
                                         {% endfor %}
@@ -120,28 +120,7 @@
                         </div>
                         
                         <!-- copy of fieldGroup -->
-                        <div class="row fieldGroupCopy" style="display: none;">
-                            <div class="input-field col s6 l2">
-                                <input name="quantity" type="text" placeholder="ex: 3" maxlength="5"
-                                    class="validate" >
-                            </div>
-                            <div class="input-field col s6 l3 ">
-                                    <select  name="unit" class="validate unit" >
-                                        <option value="" disabled selected >Units</option>
-                                        {% for unit in units %}
-                                            <option  value="{{unit.unit}}">{{unit.unit}}</option>
-                                        {% endfor %}
-                                    </select>
-                                    <br>
-                            </div>
-                            <div class="input-field col s9 l5">
-                                <i class="fas fa-carrot prefix grey-text text-darken-2"></i>
-                                <input id="ingredient2" name="ingredients" type="text" placeholder="Ingredient"
-                                    class="validate" required>
-                            </div>
-                            <br>
-                            <div class="btn red remove col s2"><i class="fas fa-minus"></i></div>
-                        </div>
+                        <div class="row fieldGroupCopy" style="display: none;"></div>
                         
                          
                      <!---->  
@@ -164,7 +143,7 @@
                                 <h5 class="center padding10 grey lighten-1 margin-bottom10 white-text">Notes</h5>
                                 <div class="input-field col s9">
                                     <i class="fas fa-comment-dots prefix grey-text text-darken-2"></i>
-                                    <textarea id="note1" name="notes" minlength="15" maxlength="300" placeholder="note" class="validate materialize-textarea" required></textarea>
+                                    <textarea id="note1" name="notes" minlength="15" maxlength="300" placeholder="note" class="validate materialize-textarea"></textarea>
                                     <label for="notes">notes </label>
                                 </div>
                             </div>
@@ -201,30 +180,29 @@
         </script>
         <script>
 
-            
-/*
-          //ingredients group add limit
-        var fieldGroupCopy =`<div class="input-field col s6 l2">
-                                <input name="quantity" type="text" placeholder="ex: 3" maxlength="5"
+ //ingredients group add limit
+       
+          var fieldGroupCopy =`<div class="input-field col s6 l2">
+                                <input value="" name="quantity" type="text" placeholder="ex: 3" maxlength="5"
                                     class="validate" >
                             </div>
                             <div class="input-field col s6 l3 ">
                                     <select  name="unit" class="browser-default validate unit" >
                                         <option value="" disabled selected >Units</option>
                                         {% for unit in units %}
-                                            <option class="press"  value="{{unit.unit}}">{{unit.unit}}</option>
-                                            {% endfor %}
+                                            <option  value="{{unit.unit}}">{{unit.unit}}</option>
+                                        {% endfor %}
                                     </select>
                                     <br>
                             </div>
                             <div class="input-field col s9 l5">
                                 <i class="fas fa-carrot prefix grey-text text-darken-2"></i>
-                                <input id="ingredient2" name="ingredients" type="text" placeholder="Ingredient"
+                                <input id="ingredient${i}" name="ingredients" type="text" placeholder="Ingredient"
                                     class="validate" required>
                             </div>
                             <br>
                             <div class="btn red remove col s2"><i class="fas fa-minus"></i></div>`;
-
+        
         var i = 0;
         var maxGroup = 25;
         $(".addIngredient").click(function(){
@@ -234,8 +212,13 @@
                 i++;
             }
             });
+             // remove group
+        $("body").on("click",".remove",function(){ 
+        $(this).parents(".fieldGroup1").remove();
+        ingredientCount--;
+        });
 
-    */
+            console.log({{listFromForm|safe}});
         </script>
         {% endblock %}
     {% endblock %}
