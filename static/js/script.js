@@ -63,7 +63,7 @@ $(document).ready(function(){
             $("#noteList").append(`<div class="row fieldGroup">
             <div class="input-field col s9">
                     <i class="fas fa-comment-dots prefix grey-text text-darken-2"></i>
-                    <textarea id="note${noteCount}" name="notes" minlength="15" maxlength="300" placeholder="note" class="validate materialize-textarea" required></textarea>
+                    <textarea id="note${noteCount}" name="notes" minlength="15" maxlength="300" placeholder="note" class="validate materialize-textarea"></textarea>
                 </div>
             <div class="btn red remove col s2 strong">X</div>
             </div>`);
@@ -76,7 +76,13 @@ $(document).ready(function(){
         $(this).parents(".fieldGroup").remove();
         noteCount--;
     });
-   
+            // remove group
+    $("body").on("click",".remove",function(){ 
+    $(this).parents(".fieldGroup1").remove();
+    ingredientCount--;
+    });
+
+    });
     
 
-  });
+ 

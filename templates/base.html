@@ -17,12 +17,12 @@
     <header>
         <div class="add-recipe-social-top hide-on-med-and-down">
             <div class="col right">
-                <a href="{{url_for('suggest_recipe')}}"><i class="fas fa-drumstick-bite"></i>Suggest a Recipe</a>
-                <a href="{{ url_for('profile', username=session['user']) }}"><i class="fas fa-user"></i> MY ACCOUNT</a>
-                <a href="https://www.youtube.com/" target="_blank"><i class="fab fa-youtube-square youtube"></i></a>
-                <a href="https://www.facebook.com/" target="_blank"><i class="fab fa-facebook-square facebook"></i></a>
-                <a href="https://www.instagram.com/" target="_blank"><i class="fab fa-instagram-square instagram"></i></a>
-                <a href="https://www.pinterest.com/" target="_blank"><i class="fab fa-pinterest-square pinterest"></i></a>
+                <a class="grey-text text-darken-4" href="{{url_for('suggest_recipe')}}"><i class="fas fa-drumstick-bite"></i>Suggest a Recipe</a>
+                <a class="grey-text text-darken-4" href="{{ url_for('profile', username=session['user']) }}"><i class="fas fa-user"></i> MY ACCOUNT</a>
+                <a href="https://www.youtube.com/" target="_blank"><i class="red-text darken-2 fab fa-youtube-square youtube"></i></a>
+                <a href="https://www.facebook.com/" target="_blank"><i class="blue-text darken-2 fab fa-facebook-square facebook"></i></a>
+                <a href="https://www.instagram.com/" target="_blank"><i class="purple-text lighten-4 fab fa-instagram-square instagram"></i></a>
+                <a href="https://www.pinterest.com/" target="_blank"><i class="red-text darken-4 fab fa-pinterest-square pinterest"></i></a>
             </div>
         </div>
         <!-- top navbar -->
@@ -50,22 +50,19 @@
                     <li><a href="#">Forum</a></li>
                     <li><a href="#">Boutique</a></li>
                 </ul> 
-            <div class="add-recipe-social-top hide-on-large-only">
-            <div class="col right">
-                <a href="{{url_for('suggest_recipe')}}"><i class="fas fa-drumstick-bite"></i>Suggest a Recipe</a>
-                <a href="{{ url_for('profile', username=session['user']) }}"><i class="fas fa-user"></i> MY ACCOUNT</a>
-            </div>
-        </div>
-                <!--
-                <div class="grey darken-3">
-                <form class="menu-search">
-                    <div class="input-field green">
-                        <input id="searc" type="search" class="white grey-text darken-2" placeholder="search">
+            
+            <div class="grey lighten-3 div-menu-med nav-wrapper hide-on-large-only ">
+                <ul class="right uppercase inline">
+                    <li class="inline"><a class="grey-text text-darken-4" href="{{url_for('suggest_recipe')}}"><i class="fas fa-drumstick-bite"></i><span class="hide-on-med-and-down">Suggest a Recipe</span></a></li>
+                    <li><a class="grey-text text-darken-4" href="{{ url_for('profile', username=session['user']) }}"><i class="fas fa-user"></i> <span class="hide-on-med-and-down">MY ACCOUNT</span></a></li>
+                </ul>
+                <form class="menu-search-med">
+                    <div class="input-field">
+                        <input type="search" class="search white grey-text darken-2" placeholder="search">
                         <label class="label-icon search-icon" for="search"><i class="fas fa-search grey-text darken-4"></i></label>
                     </div>
                 </form>
-                </div>
-                -->
+            </div>
     </header>
      <section>
         <!--flash messages -->

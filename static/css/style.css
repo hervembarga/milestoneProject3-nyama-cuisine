@@ -1,6 +1,6 @@
   
 .add-recipe-social-top {
-    background-color: #3c3c3c;
+    background-color: #fafafa;
     min-height: 45px;
     padding: 0.7rem ;
 }
@@ -8,7 +8,7 @@
 .add-recipe-social-top i{
     padding-right: 1rem; 
     padding-left: 1rem;
-    font-size: 24px;
+    font-size: 1.5rem;
 }
 
 .nav-wrapper > .brand-logo {
@@ -24,9 +24,35 @@ nav .input-field .search-icon{
     top: -1rem;
 }
 
+.menu-search-med{
+    width: 60%;
+    margin-left: 1rem;
+    padding: 0.2rem ;
+}
+.menu-search-med i{
+    padding-top: 0.7rem;
+}
+.menu-search-med >.input-field{
+    height: 35px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
 .uppercase {
     text-transform: uppercase;
 }
+.div-menu-med ul li{
+  display: inline;
+}
+.div-menu-med a{
+    padding-right: 1rem; 
+}
+.div-menu-med i{
+    padding-right: 1rem; 
+    padding-left: 1rem;
+    font-size: 1.2rem;
+}
+
 /*  change slider indicator color*/
 .slider .indicators .indicator-item.active {
   background-color: #ff9800;
