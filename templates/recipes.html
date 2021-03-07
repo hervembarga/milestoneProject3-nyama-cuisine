@@ -1,0 +1,79 @@
+    {% extends "base.html" %}
+    {% block content %}
+    <section>
+        <div class="container">
+            <br><br>
+            <h3 class="header center grey-text text-darken-2">All recipes</h3>
+            <br>
+                {% if recipes|length > 0 %}
+                <div class="row">
+                    {% for recipe in recipes %}
+                        <div class="col s12 m6">
+                            <a class="grey-text text-darken-4" href="{{ url_for('recipes') }}">
+                                <div class="card my-medium">
+                                    <div class="card-image">
+                                        <img src="{{ url_for('static', filename='images/'+recipe.inputFile) }}">
+                                        <span class="card-title card-category">{{recipe.category_name}}</span>
+                                    </div>
+                                    <div class="card-content">
+                                        <h6>{{ recipe.recipe_name }}</h6>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    {% endfor %}
+                {% endif %}    
+            </div>
+        </div>
+    </section>
+        {% block scripts %}
+        <script>
+            var loadFile = function (event) {
+                var output = document.getElementById('output');
+                output.src = URL.createObjectURL(event.target.files[0]);
+                output.onload = function () {
+                    URL.revokeObjectURL(output.src)
+                }
+            };
+
+        
+    
+        </script>
+        <script>
+
+ //ingredients group add limit
+       
+          var fieldGroupCopy =`<div class="input-field col s6 l2">
+                                <input value="" name="quantity" type="text" placeholder="ex: 3" maxlength="5"
+                                    class="validate" >
+                            </div>
+                            <div class="input-field col s6 l3 ">
+                                    <select  name="unit" class="browser-default validate unit" >
+                                        <option value="" disabled selected >Units</option>
+                                        {% for unit in units %}
+                                            <option  value="{{unit.unit}}">{{unit.unit}}</option>
+                                        {% endfor %}
+                                    </select>
+                                    <br>
+                            </div>
+                            <div class="input-field col s9 l5">
+                                <i class="fas fa-carrot prefix grey-text text-darken-2"></i>
+                                <input id="ingredient${i}" name="ingredients" type="text" placeholder="Ingredient"
+                                    class="validate" required>
+                            </div>
+                            <br>
+                            <div class="btn red remove col s2"><i class="fas fa-minus"></i></div>`;
+        
+        var i = 0;
+        var maxGroup = 25;
+        $(".addIngredient").click(function(){
+            if($('body').find('.fieldGroup1').length < maxGroup){
+                var fieldHTML = '<div class="row fieldGroup1">'+fieldGroupCopy+'</div>';
+                $('body').find('.fieldGroup1:last').after(fieldHTML);
+                i++;
+            }
+            });
+
+        </script>
+        {% endblock %}
+    {% endblock %}

@@ -105,7 +105,7 @@ def profile(username):
 
 
 
-
+# Adding a recipe to the DataBase
 @app.route("/suggest_recipe", methods=["GET", "POST"])
 def suggest_recipe():
     if request.method == "POST":
@@ -174,6 +174,13 @@ def suggest_recipe():
     return render_template(
         "suggest-recipe.html", categories=categories,
         cuisines=cuisines, units=units)
+
+
+# All recipes page
+@app.route("/recipes")
+def recipes():
+    recipes = list(mongo.db.Recipes.find())
+    return render_template("recipes.html", recipes=recipes)
 
 
 @app.route("/form_test", methods=["GET", "POST"])

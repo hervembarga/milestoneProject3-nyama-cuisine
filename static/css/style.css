@@ -75,3 +75,36 @@ nav .input-field .search-icon{
 .strong{
    font-weight: bold; 
 }
+.card .card-image .card-category {
+  bottom: 5px;
+  left: 5px;
+  max-width: 100%;
+  padding: 0.5rem;
+  border-radius: 5px;
+  background-color: rgba(226, 65, 65,0.5);
+}
+
+.card.my-medium {
+  height: 400px;
+}
+.card.my-medium .card-action {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+.card.my-medium .card-content {
+  max-height: 100%;
+  overflow: hidden;
+  padding-top: 0px;
+}
+.card.my-medium {
+  position: relative;
+}
+.card.my-medium .card-image {
+  max-height: 80%;
+  overflow: hidden;
+}
+.card.my-medium .card-image + .card-content {
+  max-height: 20%;
+}

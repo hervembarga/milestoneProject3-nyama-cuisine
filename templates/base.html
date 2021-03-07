@@ -32,7 +32,7 @@
                 <a href="{{url_for('index')}}" class="brand-logo">Nyama Cuisine</a>
                 <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="fas fa-bars"></i></a>
                 <ul class="right hide-on-med-and-down uppercase">
-                    <li><a href="#">Recipes</a></li>
+                    <li><a href="{{ url_for('recipes') }}">Recipes</a></li>
                     <li><a href="#">Forum</a></li>
                     <li><a href="#">Boutique</a></li>
                 </ul>
@@ -46,7 +46,7 @@
         </nav>
                 <!-- mobile sidenav -->
                 <ul id="mobile-demo" class="sidenav uppercase">
-                    <li><a href="#">Recipes</a></li>
+                    <li><a href="{{ url_for('recipes') }}">Recipes</a></li>
                     <li><a href="#">Forum</a></li>
                     <li><a href="#">Boutique</a></li>
                 </ul> 
