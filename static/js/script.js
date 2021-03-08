@@ -45,7 +45,7 @@ $(document).ready(function(){
             $("#stepList").append(`<div class="row fieldGroup">
             <div class="input-field col s9">
                     <i class="fas fa-book-reader prefix grey-text text-darken-2"></i>
-                    <textarea id="step${stepCount}" name="steps" minlength="15" maxlength="300" placeholder="preparation step" class="validate materialize-textarea" required></textarea>
+                    <textarea id="step${stepCount}" name="steps" minlength="8" maxlength="300" placeholder="preparation step" class="validate materialize-textarea" required></textarea>
                 </div>
             <div class="btn red remove col s2 strong">X</div>
             </div>`);
@@ -63,7 +63,7 @@ $(document).ready(function(){
             $("#noteList").append(`<div class="row fieldGroup">
             <div class="input-field col s9">
                     <i class="fas fa-comment-dots prefix grey-text text-darken-2"></i>
-                    <textarea id="note${noteCount}" name="notes" minlength="15" maxlength="300" placeholder="note" class="validate materialize-textarea"></textarea>
+                    <textarea id="note${noteCount}" name="notes" minlength="8" maxlength="300" placeholder="note" class="validate materialize-textarea"></textarea>
                 </div>
             <div class="btn red remove col s2 strong">X</div>
             </div>`);
