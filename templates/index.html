@@ -65,39 +65,21 @@
                 <h5 class="header center light">Taste from around the world</h5>
                 <br>
                 <div class="row">
+                {%  for asianRecipe in asianRecipes %}
                     <div class="col s12 m4">
-                        <div class="card">
+                        <div class="card my-medium">
+                            <a class="grey-text text-darken-4" href="{{ url_for('view_recipe', recipe_id=asianRecipe._id) }}">
                             <div class="card-image">
-                                <img src="{{ url_for('static', filename='images/slider2.jpg') }}">
+                                <img src="{{ url_for('static', filename='images/'+asianRecipe.inputFile) }}">
+                                <span class="orange darken-2 card-title index-card-title card-category text-shadow">{{asianRecipe.category_name}}</span>
                             </div>
                             <div class="card-content">
-                                <h4 class="card-title">Card Title</h4>
-                                <p>I am a very simple card. I am good at containing small bits of information. </p>
+                                <p>{{asianRecipe.recipe_name}}</p>
                             </div>
+                            </a>
                         </div>
                     </div>
-                    <div class="col s12 m4">
-                        <div class="card">
-                            <div class="card-image">
-                                <img src="{{ url_for('static', filename='images/slider1.jpg') }}">
-                            </div>
-                            <div class="card-content">
-                                <h4 class="card-title">Card Title</h4>
-                                <p>I am a very simple card. I am good at containing small bits of information. </p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col s12 m4">
-                        <div class="card">
-                            <div class="card-image">
-                                <img src="{{ url_for('static', filename='images/slider3.jpg') }}">
-                            </div>
-                            <div class="card-content">
-                                <h4 class="card-title">Card Title</h4>
-                                <p>I am a very simple card. I am good at containing small bits of information. </p>
-                            </div>
-                        </div>
-                    </div>
+                {% endfor %}
                 </div>
             </div>
         </section>
@@ -107,51 +89,23 @@
                 <h3 class="header center orange-text text-darken-2">Breakfast and Brunch</h3>
                 <h5 class="header center light">Wake up with smile</h5>
                 <br>
+                <div class="col s12 m6 l3"></div>
                 <div class="row">
+                {%  for breakBrunch in breakBrunches %}
                     <div class="col s12 m6 l3">
-                        <div class="card">
+                        <div class="card my-medium">
+                            <a class="grey-text text-darken-4" href="{{ url_for('view_recipe', recipe_id=breakBrunch._id) }}">
                             <div class="card-image">
-                                <img src="{{ url_for('static', filename='images/slider2.jpg') }}">
+                                <img src="{{ url_for('static', filename='images/'+breakBrunch.inputFile) }}">
+                                <span class="orange darken-2 card-title index-card-title card-category text-shadow"><i class="fas fa-users"></i> &nbsp;{{breakBrunch.serving}}</span>
                             </div>
                             <div class="card-content">
-                                <h4 class="card-title">Card Title</h4>
-                                <p>I am a very simple card. I am good at containing small bits of information. </p>
+                                <p>{{breakBrunch.recipe_name}}</p>
                             </div>
+                            </a>
                         </div>
                     </div>
-                    <div class="col s12 m6 l3">
-                        <div class="card">
-                            <div class="card-image">
-                                <img src="{{ url_for('static', filename='images/slider2.jpg') }}">
-                            </div>
-                            <div class="card-content">
-                                <h4 class="card-title">Card Title</h4>
-                                <p>I am a very simple card. I am good at containing small bits of information. </p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col s12 m6 l3">
-                        <div class="card">
-                            <div class="card-image">
-                                <img src="{{ url_for('static', filename='images/slider1.jpg') }}">
-                            </div>
-                            <div class="card-content">
-                                <h4 class="card-title">Card Title</h4>
-                                <p>I am a very simple card. I am good at containing small bits of information. </p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col s12 m6 l3">
-                        <div class="card">
-                            <div class="card-image">
-                                <img src="{{ url_for('static', filename='images/slider3.jpg') }}">
-                            </div>
-                            <div class="card-content">
-                                <h4 class="card-title">Card Title</h4>
-                                <p>I am a very simple card. I am good at containing small bits of information. </p>
-                            </div>
-                        </div>
-                    </div>
+                {% endfor %}
                 </div>
                 <br>
             </div>
