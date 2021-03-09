@@ -36,7 +36,9 @@ def allowed_file(filename):
 @app.route("/")
 def index():
     categories = mongo.db.Categories.find()
-    return render_template("index.html", categories=categories)
+    latestRecipes = list(mongo.db.Recipes.find().limit(3)
+        .sort("submission_date",-1))
+    return render_template("index.html", latestRecipes=latestRecipes)
 # to be completed!
 
 
