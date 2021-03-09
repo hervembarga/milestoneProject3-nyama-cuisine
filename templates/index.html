@@ -43,6 +43,7 @@
                 {%  for latestRecipe in latestRecipes %}
                     <div class="col s12 m4">
                         <div class="card my-medium">
+                            <a class="grey-text text-darken-4" href="{{ url_for('view_recipe', recipe_id=latestRecipe._id) }}">
                             <div class="card-image">
                                 <img src="{{ url_for('static', filename='images/'+latestRecipe.inputFile) }}">
                                 <span class="orange darken-2 card-title index-card-title card-category text-shadow">{{latestRecipe.category_name}}</span>
@@ -50,6 +51,7 @@
                             <div class="card-content">
                                 <p>{{latestRecipe.recipe_name}}</p>
                             </div>
+                            </a>
                         </div>
                     </div>
                 {% endfor %}
@@ -102,7 +104,7 @@
         <!-- breakfast brunch recipe -->
         <section>
             <div class="container">
-                <h3 class="header center orange-text">Breakfast and Brunch</h3>
+                <h3 class="header center orange-text text-darken-2">Breakfast and Brunch</h3>
                 <h5 class="header center light">Wake up with smile</h5>
                 <br>
                 <div class="row">
