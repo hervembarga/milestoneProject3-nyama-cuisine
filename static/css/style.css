@@ -108,3 +108,9 @@ nav .input-field .search-icon{
 .card.my-medium .card-image + .card-content {
   max-height: 20%;
 }
+.margin-botton-0{
+    margin-bottom: 0;
+}
+.card-panel .margin-botton-0{
+    margin-bottom: 0;
+}

@@ -1,0 +1,83 @@
+{% extends "base.html" %}
+{% block content %}
+<section>
+    <div class="container">
+        <br><br>
+        <h4 class="header center grey-text text-darken-2">{{recipe.recipe_name}}</h4>
+        <br>
+        <!-- image -->
+        <div class="row">
+            <div class="col s12 m10 offset-m1">
+                <div class="card">
+                    <div class="card-image">
+                        <img class="" src="{{ url_for('static', filename='images/'+recipe.inputFile) }}"
+                        alt="{{recipe.recipe_name}}">
+                        <span class="card-title card-category">{{recipe.category_name}}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- author time serving -->
+        <div class="row margin-botton-0">
+            <div class="col s12 m10 offset-m1">
+                <div class="card-panel">
+                <div class="row margin-botton-0">
+                    <div class="col s4">
+                         <span class="strong">By</span> {{recipe.created_by}}
+                    </div>
+                    <div class="col s4">
+                        <span class="strong">Serving:</span>  {{recipe.serving}}
+                    </div>
+                    <div class="col s4">
+                         <i class=" strong far fa-clock"></i> {{time}} min 
+                    </div>
+                </div></div>
+            </div>
+        </div>
+        <!-- ingredients -->
+        <div class="row">
+            <div class="col s12 m10 offset-m1">
+                <h5 class="center padding10 grey darken-3 margin-bottom10 white-text">Ingredients</h5>
+                <div class="card-panel ">
+                    {% if recipe.ingredients|length > 0 %}
+                        {% for ingredient in recipe.ingredients  %}
+                            {% if ingredient.unit == None %}
+                            <p><i class="fas fa-check-circle"></i>&nbsp; {{ ingredient.quantity }} {{ ingredient.ingredient }}</p>
+                            {% else %}
+                            <p><i class="grey-text text-darken-3 fas fa-check-circle"></i>&nbsp; {{ ingredient.quantity }} {{ ingredient.unit }}  {{ ingredient.ingredient }}</p>
+                            {% endif %}
+                        {% endfor %}
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        <!-- Preparation -->
+        <div class="row">
+            <div class="col s12 m10 offset-m1">
+                <h5 class="center padding10 grey darken-3 margin-bottom10 white-text">Preparation</h5>
+                <div class="card-panel">
+                    {% if recipe.steps|length > 0 %}
+                        {% for step in recipe.steps  %}
+                            <p><span class="strong">{{loop.index}} - </span></i>&nbsp; {{step}}</p>
+                        {% endfor %}
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        <!-- Notes -->
+        {% if recipe.notes|length > 0 %}
+        <div class="row">
+            <div class="col s12 m10 offset-m1">
+                <h5 class="center padding10 grey darken-3 margin-bottom10 white-text">Notes</h5>
+                <div class="card-panel">
+                        {% for note in recipe.notes  %}
+                            <p><span class="strong">{{loop.index}} - </span></i>&nbsp; {{note}}</p>
+                        {% endfor %}
+                </div>
+            </div>
+        </div>
+        {% endif %}
+    </div>
+</section>
+
+{% endblock %}

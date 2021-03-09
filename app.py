@@ -183,19 +183,12 @@ def recipes():
     return render_template("recipes.html", recipes=recipes)
 
 
-@app.route("/form_test", methods=["GET", "POST"])
-def form_test():
-
-    if request.method == "POST":
-
-        req = request.form
-        print(req.getlist("quantity"))
-        print(req.getlist("unit"))
-        print(req.getlist("ingredients"))
-
-        return redirect(request.url)
-
-    return render_template("form_test.html")
+@app.route("/recipes/<recipe_id>")
+def view_recipe(recipe_id):
+    
+    recipe = mongo.db.Recipes.find_one({"_id": ObjectId(recipe_id)})
+    time = int(recipe['time'][0]['prep_time']) + int(recipe['time'][1]['cooking_time'])
+    return render_template("view-recipe.html", recipe=recipe,time=time)
 
 
 if __name__ == "__main__":
