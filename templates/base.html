@@ -36,10 +36,10 @@
                     <li><a href="#">Forum</a></li>
                     <li><a href="#">Boutique</a></li>
                 </ul>
-                <form class="menu-search hide-on-med-and-down">
-                    <div class="input-field">
-                        <input type="search" class="search white grey-text darken-2" placeholder="search">
-                        <label class="label-icon search-icon" for="search"><i class="fas fa-search grey-text darken-4"></i></label>
+                <form action="{{ url_for('search') }}" method="POST" class="menu-search hide-on-med-and-down">
+                    <div class="input-field ">
+                       <label for="query" class="label-icon search-icon"><i class="fas fa-search grey-text darken-4 search-icon"></i></label>
+                        <input type="search" name="query" minlength="3" class="validate search white grey-text darken-2" placeholder="search" required>
                     </div>
                 </form>
             </div>
@@ -56,10 +56,10 @@
                     <li class="inline"><a class="grey-text text-darken-4" href="{{url_for('suggest_recipe')}}"><i class="fas fa-drumstick-bite"></i><span class="hide-on-med-and-down">Suggest a Recipe</span></a></li>
                     <li><a class="grey-text text-darken-4" href="{{ url_for('profile', username=session['user']) }}"><i class="fas fa-user"></i> <span class="hide-on-med-and-down">MY ACCOUNT</span></a></li>
                 </ul>
-                <form class="menu-search-med">
-                    <div class="input-field">
-                        <input type="search" class="search white grey-text darken-2" placeholder="search">
-                        <label class="label-icon search-icon" for="search"><i class="fas fa-search grey-text darken-4"></i></label>
+                <form action="{{ url_for('search') }}" method="POST" class="menu-search-med">
+                    <div class="input-field ">
+                       <label for="query" class="label-icon search-icon"><i class="fas fa-search grey-text darken-4 search-icon"></i></label>
+                        <input type="search" name="query" minlength="3" class="validate search white grey-text darken-2" placeholder="search" required>
                     </div>
                 </form>
             </div>

@@ -36,14 +36,21 @@ def allowed_file(filename):
 @app.route("/")
 def index():
     latestRecipes = list(mongo.db.Recipes.find().limit(3)
-        .sort("submission_date",-1))
+                         .sort("submission_date", -1))
     asianRecipes = list(mongo.db.Recipes.find(
         {"cuisine_name": "asian"}).limit(3))
-    breakBrunches =list(mongo.db.Recipes.find(
+    breakBrunches = list(mongo.db.Recipes.find(
         {"category_name": "breakfast and brunch"}).limit(4))
     return render_template("index.html", latestRecipes=latestRecipes,
-        asianRecipes=asianRecipes, breakBrunches=breakBrunches)
+                           asianRecipes=asianRecipes, breakBrunches=breakBrunches)
 # to be completed!
+
+
+@app.route("/search", methods=["GET", "POST"])
+def search():
+    query = request.form.get("query")
+    recipes = list(mongo.db.Recipes.find({"$text": {"$search": query}}))
+    return render_template("recipes.html", recipes=recipes)
 
 
 @app.route("/register", methods=["GET", "POST"])
@@ -108,6 +115,14 @@ def profile(username):
         return render_template("profile.html", username=username)
 
     return redirect(url_for("index"))
+
+
+@app.route("/logout")
+def logout():
+    #remove user from session cookies
+    flash("You have been logged out")
+    session.pop("user")
+    return redirect(url_for("login"))
 
 
 
