@@ -197,6 +197,77 @@ def suggest_recipe():
         cuisines=cuisines, units=units)
 
 
+# Edit a recipe to the DataBase
+@app.route("/edit_recipe/<recipe_id>", methods=["GET", "POST"])
+def edit_recipe(recipe_id):
+    if request.method == "POST":
+        username = mongo.db.Users.find_one(
+                {"username": session["user"]})["username"]
+        file = request.files['inputFile']
+        filename = secure_filename(file.filename)
+        if file and allowed_file(file.filename):
+            file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+            
+
+        time = [
+            {"prep_time": request.form.get("prep_time")},
+            {"cooking_time": request.form.get("cooking_time")
+        }]
+
+        ingred = request.form.getlist("ingredients")
+        quantity = request.form.getlist("quantity")
+        unit = request.form.getlist("unit")
+        ingredients =[]
+        for (i, q, u) in itertools.zip_longest(ingred, quantity, unit):
+            if q == "":
+                ingredients.append({"ingredient": i,
+                    "quantity": "",
+                    "unit": u
+                    })
+            elif u == "":
+                ingredients.append({"ingredient": i,
+                    "quantity": q,
+                    "unit": ""
+                    }) 
+            elif u == "" and q == "":
+                ingredients.append({"ingredient": i,
+                    "quantity": "",
+                    "unit": ""
+                    }) 
+            else:
+                ingredients.append({"ingredient": i,
+                    "quantity": q,
+                    "unit": u
+                    })
+
+        today = datetime.datetime.now()
+        recipe = {
+            "recipe_name": request.form.get("recipe_name"),
+            "serving": request.form.get("serving"),
+            "inputFile": file.filename,
+            "time": time,
+            "category_name": request.form.get("category_name"),
+            "cuisine_name": request.form.get("cuisine_name"),
+            "ingredients": ingredients,
+            "steps": request.form.getlist("steps"),
+            "notes": request.form.getlist("notes"),
+            "submission_date": today,
+            "created_by": session["user"]
+        }
+        
+        mongo.db.Recipes.update({"_id": ObjectId(recipe_id)},recipe)
+        flash("Recipe Successfully Updated")
+        return redirect(url_for("profile", username=username))
+
+    recipe = mongo.db.Recipes.find_one({"_id": ObjectId(recipe_id)})
+    categories = mongo.db.Categories.find().sort("category_name", 1)
+    cuisines = mongo.db.Cuisines.find().sort("cuisine_name", 1)
+    units = list(mongo.db.Units.find().sort("unit", 1))
+    return render_template(
+        "edit-recipe.html", recipe=recipe, categories=categories,
+        cuisines=cuisines, units=units)
+
+
 # All recipes page
 @app.route("/recipes")
 def recipes():
