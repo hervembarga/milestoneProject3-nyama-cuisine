@@ -42,7 +42,7 @@
                 <div class="row">
                 {%  for latestRecipe in latestRecipes %}
                     <div class="col s12 m4">
-                        <div class="card my-medium">
+                        <div class="card my-medium hoverable">
                             <a class="grey-text text-darken-4" href="{{ url_for('view_recipe', recipe_id=latestRecipe._id) }}">
                             <div class="card-image">
                                 <img src="{{ url_for('static', filename='images/'+latestRecipe.inputFile) }}">
@@ -67,7 +67,7 @@
                 <div class="row">
                 {%  for asianRecipe in asianRecipes %}
                     <div class="col s12 m4">
-                        <div class="card my-medium">
+                        <div class="card my-medium hoverable">
                             <a class="grey-text text-darken-4" href="{{ url_for('view_recipe', recipe_id=asianRecipe._id) }}">
                             <div class="card-image">
                                 <img src="{{ url_for('static', filename='images/'+asianRecipe.inputFile) }}">
@@ -93,7 +93,7 @@
                 <div class="row">
                 {%  for breakBrunch in breakBrunches %}
                     <div class="col s12 m6 l3">
-                        <div class="card my-medium">
+                        <div class="card my-medium hoverable">
                             <a class="grey-text text-darken-4" href="{{ url_for('view_recipe', recipe_id=breakBrunch._id) }}">
                             <div class="card-image">
                                 <img src="{{ url_for('static', filename='images/'+breakBrunch.inputFile) }}">
@@ -110,65 +110,6 @@
                 <br>
             </div>
         </section>
-        <!-- breakfast brunch caroussel -->
-        <!--
-        <section>
-            <div class="container">
-                <h3 class="header center orange-text">Breakfast and Brunch</h3>
-                <h5 class="header center light">Wake up with smile</h5>
-                <br>
-                <div class="carousel">
-                    <div class="carousel-item">
-                        <div class="card">
-                            <div class="card-image">
-                                <img src="{{ url_for('static', filename='images/slider1.jpg') }}">
-                            </div>
-                            <div class="card-content">
-                                <h4 class="card-title">Card Title</h4>
-                                <p>I am a very simple card. I am good at containing small bits of information. </p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="carousel-item">
-                        <div class="card">
-                            <div class="card-image">
-                                <img src="{{ url_for('static', filename='images/slider2.jpg') }}">
-                            </div>
-                            <div class="card-content">
-                                <h4 class="card-title">Card Title</h4>
-                                <p>I am a very simple card. I am good at containing small bits of information. </p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="carousel-item">
-                        <div class="card">
-                            <div class="card-image">
-                                <img src="{{ url_for('static', filename='images/slider3.jpg') }}">
-                            </div>
-                            <div class="card-content">
-                                <h4 class="card-title">Card Title</h4>
-                                <p>I am a very simple card. I am good at containing small bits of information. </p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="carousel-item">
-                        <div class="card">
-                            <div class="card-image">
-                                <img src="{{ url_for('static', filename='images/slider4.jpg') }}">
-                            </div>
-                            <div class="card-content">
-                                <h4 class="card-title">Card Title</h4>
-                                <p>I am a very simple card. I am good at containing small bits of information. </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-        <br>
-        <br>
-        -->
-        
 
 
     {% endblock %}

@@ -3,7 +3,7 @@
     <section>
         <div class="container">
             <br><br>
-            <h3 class="header center grey-text text-darken-2">All recipes</h3>
+            <h3 class="header center grey-text text-darken-3">All recipes</h3>
             <br>
             {% if recipes|length > 0 %}
                 <div class="row">
@@ -12,7 +12,7 @@
                             <a class="grey-text text-darken-4" href="{{ url_for('view_recipe', recipe_id=recipe._id) }}">
                                 <div class="card my-medium">
                                     <div class="card-image">
-                                        <img src="{{ url_for('static', filename='images/'+recipe.inputFile) }}">
+                                        <img src="{{ url_for('static', filename='images/'+recipe.inputFile) }}" alt="{{recipe.recipe_name}}">
                                         <span class="card-title card-category">{{recipe.category_name}}</span>
                                     </div>
                                     <div class="card-content">

@@ -24,6 +24,10 @@ nav .input-field .search-icon{
     top: -1.8rem;
     left: 0.8rem;
 }
+.input-field .search-icon-mobile{
+    top: 0rem;
+    left: 0.8rem;
+}
 
 .menu-search-med{
     width: 60%;
@@ -31,7 +35,7 @@ nav .input-field .search-icon{
     padding: 0.2rem ;
 }
 .menu-search-med i{
-    padding-top: 0.7rem;
+    padding-top: 0rem;
 }
 .menu-search-med >.input-field{
     height: 35px;
@@ -121,4 +125,7 @@ nav .input-field .search-icon{
 .card .card-image .index-card-title {
     font-size: 1rem;
     font-weight: 600;
+}
+.edit-del-btn {
+    margin: 5px;
 }

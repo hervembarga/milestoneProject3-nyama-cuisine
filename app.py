@@ -108,11 +108,13 @@ def login():
 @app.route("/profile/<username>", methods=["GET", "POST"])
 def profile(username):
     # grab the session user's username from db
+    recipes = list(mongo.db.Recipes.find())
     username = mongo.db.Users.find_one(
         {"username": session["user"]})["username"]
 
     if session["user"]:
-        return render_template("profile.html", username=username)
+        return render_template("profile.html", username=username,
+            recipes=recipes)
 
     return redirect(url_for("index"))
 
@@ -123,6 +125,14 @@ def logout():
     flash("You have been logged out")
     session.pop("user")
     return redirect(url_for("login"))
+
+
+@app.route("/delete_recipe/<recipe_id>")
+def delete_recipe(recipe_id):
+    recipe = mongo.db.Recipes.find_one({"_id": ObjectId(recipe_id)})
+    mongo.db.Recipes.remove(recipe)
+    flash("Task Successfully Deleted")
+    return redirect(url_for("profile",username=session["user"]))
 
 
 

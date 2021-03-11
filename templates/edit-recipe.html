@@ -3,14 +3,14 @@
     <section>
         <div class="container">
             <br><br>
-            <h3 class="header center orange-text">Edit recipe</h3>
+            <h3 class="header center orange-text text-darken-1">Edit recipe</h3>
             <br>
             <div class="row">
-                <form class="col s12 m10 offset-m1" method="POST" enctype="multipart/form-data" action="{{ url_for('edit_recipe') }}">
+                <form class="col s12 m10 offset-m1" method="POST" enctype="multipart/form-data" action="{{ url_for('edit_recipe', recipe_id=recipe._id) }}">
                     <div class="card-panel">
                         <!-- Recipe name -->
                         <div class="row">
-                            <h5 class="center padding10 grey lighten-1 margin-bottom10 white-text">Recipe name</h5>
+                            <h5 class="center padding10 grey darken-2 margin-bottom10 white-text">Recipe name</h5>
                             <div class="input-field col s12">
                                 <i class="fas fa-bread-slice prefix grey-text text-darken-2"></i>
                                 <input id="recipe_name" name="recipe_name" value="{{ recipe.recipe_name }}" type="text" minlength="5" maxlength="60" class="validate" required>
@@ -32,21 +32,21 @@
                                 <div class="file-field input-field col s12 m6">
                                     <i class="fas fa-camera center prefix grey-text text-darken-2"></i>
                                     <div class="btn-large transparent">
-                                        <input type="file" name="inputFile" value="{{ recipe.inputFile }}" required>
+                                        <input type="file" name="inputFile" required>
                                     </div>
                                     <div class="file-path-wrapper">
-                                        <input class="file-path validate" type="text" placeholder="Upload a photo">
+                                        <input class="file-path validate" value="{{ recipe.inputFile }}"  type="text" placeholder="Upload a photo">
                                     </div>
                                 </div>
                         </div>
                         <!-- time -->
                         <div class="row">
-                            <h5 class="center green padding10 grey lighten-1 margin-bottom10 white-text">Time</h5>
+                            <h5 class="center green padding10 grey darken-2 margin-bottom10 white-text">Time</h5>
                         </div>
                         <div class="row">
                             <div class="input-field col s8 l4">
                                 <i class="far fa-clock prefix grey-text text-darken-2"></i>
-                                <input id="prep_time" value="{{ recipe.prep_time }}" name="prep_time" type="number" min="0" max="1500" class="validate" required>
+                                <input id="prep_time" value="{{ recipe.time[0].prep_time }}" name="prep_time" type="number" min="0" max="1500" class="validate" required>
                                 <label for="prep_time">preparation time</label>
                             </div>
                             <div class="input-field prefix col s4 l2">
@@ -54,7 +54,7 @@
                             </div>
                             <div class="input-field col s8 l4">
                                 <i class="fas fa-fire-alt prefix grey-text text-darken-2"></i>
-                                <input id="cooking_time" name="cooking_time" value="{{ recipe.cooking_time }}" type="number" min="0" max="1500" class="validate" required>
+                                <input id="cooking_time" name="cooking_time" value="{{ recipe.time[1].cooking_time }}" type="number" min="0" max="1500" class="validate" required>
                                 <label for="cooking_time">cooking time</label>
                             </div>
                             <div class="input-field prefix col s4 l2">
@@ -63,7 +63,7 @@
                         </div>
                         <!-- categories -->
                         <div class="row">
-                            <h5 class="center green padding10 grey lighten-1 margin-bottom10 white-text">Category</h5>
+                            <h5 class="center green padding10 grey darken-2 margin-bottom10 white-text">Category</h5>
                             <div class="input-field col s12">
                                 <i class="fas fa-folder-open prefix grey-text text-darken-2"></i>
                                 <select id="category_name" name="category_name" class="validate" required>
@@ -81,7 +81,7 @@
                         </div>
                         <!-- cuisines -->
                         <div class="row">
-                            <h5 class="center green padding10 grey lighten-1 margin-bottom10 white-text">Cuisine</h5>
+                            <h5 class="center green padding10 grey darken-2 margin-bottom10 white-text">Cuisine</h5>
                             <div class="input-field col s12">
                                 <i class="fas fa-utensils prefix grey-text text-darken-2"></i>
                                 <select id="cuisine_name" name="cuisine_name" class="validate" required>
@@ -100,7 +100,7 @@
                         <!-- Ingredients -->
                         <div id="ingredientList">
                             <div class="row fieldGroup1">
-                                <h5 class="center padding10 grey lighten-1 margin-bottom10 white-text">Ingredients</h5>
+                                <h5 class="center padding10 grey darken-2 margin-bottom10 white-text">Ingredients</h5>
                                 <div class="input-field col s6 l2">
                                     <input value="" name="quantity" type="text" placeholder="ex: 3" maxlength="5" class="validate">
                                     <label for="quantity">Quantity </label>
@@ -133,7 +133,7 @@
                         <!-- preparation -->
                         <div id="stepList" class="press">
                                 <div class="row fieldGroup">
-                                <h5 class="center padding10 grey lighten-1 margin-bottom10 white-text">Preparation</h5>
+                                <h5 class="center padding10 grey darken-2 margin-bottom10 white-text">Preparation</h5>
                                 <div class="input-field col s9">
                                     <i class="fas fa-book-reader prefix grey-text text-darken-2"></i>
                                     <textarea id="step1" name="steps" minlength="6" maxlength="300" placeholder="preparation step" class="validate materialize-textarea" required></textarea>
@@ -145,12 +145,13 @@
                         <!-- notes -->
                         <div id="noteList">
                             <div class="row fieldGroup">
-                                <h5 class="center padding10 grey lighten-1 margin-bottom10 white-text">Notes</h5>
-                                <div class="input-field col s9">
-                                    <i class="fas fa-comment-dots prefix grey-text text-darken-2"></i>
-                                    <textarea id="note1" name="notes" minlength="8" maxlength="300" placeholder="note" class="validate materialize-textarea"></textarea>
-                                    <label for="notes">notes </label>
-                                </div>
+                                <h5 class="center padding10 grey darken-2 margin-bottom10 white-text">Notes</h5>
+                                    <!--to do-->
+                                    <div class="input-field col s9">
+                                        <i class="fas fa-comment-dots prefix grey-text text-darken-2"></i>
+                                        <textarea id="note1" name="notes" minlength="8" maxlength="300" placeholder="note" class="validate materialize-textarea"></textarea>
+                                        <label for="notes">notes </label>
+                                    </div>
                             </div>
                         </div>
                         <div id="addNote" class="btn green darken-2">add a note</div>

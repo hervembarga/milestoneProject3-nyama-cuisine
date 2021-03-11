@@ -2,6 +2,7 @@ $(document).ready(function(){
     $(".sidenav").sidenav();
     $('.slider').slider();
     $("select").formSelect();
+    $('.modal').modal();
     $('.carousel').carousel({
         dist: 0,
         shift: 20});
