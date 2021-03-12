@@ -58,7 +58,7 @@
                 <div class="card-panel">
                     {% if recipe.steps|length > 0 %}
                         {% for step in recipe.steps  %}
-                            <p><span class="strong">{{loop.index}} - </span></i>&nbsp; {{step}}</p>
+                            <p><span class="strong">{{loop.index}} - </span>&nbsp; {{step}}</p>
                         {% endfor %}
                     {% endif %}
                 </div>
@@ -71,7 +71,7 @@
                 <h5 class="center padding10 grey darken-3 margin-bottom10 white-text">Notes</h5>
                 <div class="card-panel">
                         {% for note in recipe.notes  %}
-                            <p><span class="strong">{{loop.index}} - </span></i>&nbsp; {{note}}</p>
+                            <p><span class="strong"><i class="fas fa-check-circle"></i></span>&nbsp; {{note}}</p>
                         {% endfor %}
                 </div>
             </div>
