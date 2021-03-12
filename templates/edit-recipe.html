@@ -132,12 +132,13 @@
                      <!---->  
                         <!-- preparation -->
                         <div id="stepList" class="press">
-                                <div class="row fieldGroup">
+                            <div class="row fieldGroup">
                                 <h5 class="center padding10 grey darken-2 margin-bottom10 white-text">Preparation</h5>
                                 <div class="input-field col s9">
+                                {% for step in recipe.steps %}
                                     <i class="fas fa-book-reader prefix grey-text text-darken-2"></i>
-                                    <textarea id="step1" name="steps" minlength="6" maxlength="300" placeholder="preparation step" class="validate materialize-textarea" required></textarea>
-                                    <label for="steps">steps </label>
+                                    <textarea id="step{{loop.index}}" name="steps" minlength="6" maxlength="300"  class="validate materialize-textarea">{{ step }}</textarea>
+                                {% endfor %}
                                 </div>
                             </div>
                         </div>
@@ -148,9 +149,10 @@
                                 <h5 class="center padding10 grey darken-2 margin-bottom10 white-text">Notes</h5>
                                     <!--to do-->
                                     <div class="input-field col s9">
+                                    {% for note in recipe.notes %}
                                         <i class="fas fa-comment-dots prefix grey-text text-darken-2"></i>
-                                        <textarea id="note1" name="notes" minlength="8" maxlength="300" placeholder="note" class="validate materialize-textarea"></textarea>
-                                        <label for="notes">notes </label>
+                                        <textarea id="note{{loop.index}}" name="notes" minlength="8" maxlength="300" placeholder="note" class="validate materialize-textarea">{{note}}</textarea>
+                                    {% endfor %}
                                     </div>
                             </div>
                         </div>

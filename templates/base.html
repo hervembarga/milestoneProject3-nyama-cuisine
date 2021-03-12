@@ -89,12 +89,14 @@
             <div class="row">
                 <div class="col l6 s12">
                     <h5 class="white-text">Contact us</h5>
-                    <p class="grey-text text-lighten-4">We are a team of college students working on this project like
-                        it's
-                        our full time job. Any amount would help support and continue development on this project and is
-                        greatly appreciated.</p>
-
-
+                    <form id="sendMail" onsubmit="return sendMail(this);" class="">
+                        <div class="input-field">
+                            <input id="name" type="text" class="validate white grey-text text-darken-4 " placeholder=" name" required>
+                            <input id="email" type="email" class="validate white grey-text text-darken-4" placeholder=" email" required>
+                            <textarea id="message" name="message" class="materialize-textarea white grey-text text-darken-4" placeholder=" Your message" row="4" required></textarea>
+                            <button type="submit" class="orange darken-4 btn right">Send</button>
+                        </div>        
+                    </form>
                 </div>
                 <div class="col l3 s12">
                     <h5 class="white-text">Recipes categories</h5>
@@ -115,17 +117,17 @@
                         </li>
                         <li>
                             <a href="https://www.facebook.com/" target="_blank">
-                                <i class="red-text darken-2 fab fa-facebook-square facebook footer-social-icons"></i>
+                                <i class="blue-text darken-2 fab fa-facebook-square facebook footer-social-icons"></i>
                             </a>
                         </li>
                         <li>
-                            <a href="https://www.youtube.com/" target="_blank">
-                                <i class="red-text darken-2 fab fa-youtube-square youtube footer-social-icons"></i>
+                            <a href="https://www.instagram.com/" target="_blank">
+                                <i class="purple-text lighten-4 fab fa-instagram-square instagram footer-social-icons"></i>
                             </a>
                         </li>
                         <li>
-                            <a href="https://www.youtube.com/" target="_blank">
-                                <i class="red-text darken-2 fab fa-youtube-square youtube footer-social-icons"></i>
+                            <a href="https://www.pinterest.com/" target="_blank">
+                                <i class="red-text darken-4 fab fa-pinterest-square pinterest footer-social-icons"></i>
                             </a>
                         </li>
                     </ul>
@@ -134,7 +136,7 @@
         </div>
         <div class="footer-copyright">
             <div class="container">
-                Made by <a class="orange-text text-lighten-3" href="">Materialize</a>
+                Made by <a class="orange-text text-lighten-3" href=""><i class="far fa-copyright"></i> 2021 Eezy Web Inc.</a>
             </div>
         </div>
     </footer>
@@ -142,6 +144,15 @@
     <!-- script -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script type="text/javascript"
+        src="https://cdn.jsdelivr.net/npm/emailjs-com@2/dist/email.min.js">
+    </script>
+    <script type="text/javascript">
+        (function(){
+      emailjs.init("user_Do8FsPYLxWg1Z0ECDz61l");
+        })(); 
+    </script>
+    <script src="../static/js/sendMail.js" ></script>
     <script src="../static/js/script.js"></script>
     {% block scripts %}
     {% endblock %}

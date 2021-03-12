@@ -139,3 +139,14 @@ nav .input-field .search-icon{
 .social-icons-list li{
     display: inline;
 }
+
+.email-succes{
+     color: #ffd230;
+    background-color: #139D08;
+    border: 2px solid #d4ad00;
+}
+.email-failed{
+     color: #ffd230;
+    background-color: red;
+    border: 2px solid #ffd230;
+}
