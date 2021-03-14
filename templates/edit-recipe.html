@@ -101,8 +101,9 @@
                         <div id="ingredientList">
                             <div class="row fieldGroup1">
                                 <h5 class="center padding10 grey darken-2 margin-bottom10 white-text">Ingredients</h5>
+                                {% for ingred in recipe.ingredients %}
                                 <div class="input-field col s6 l2">
-                                    <input value="" name="quantity" type="text" placeholder="ex: 3" maxlength="5" class="validate">
+                                    <input value="{{ingred.quantity}}" name="quantity" type="text" placeholder="ex: 3" maxlength="5" class="validate">
                                     <label for="quantity">Quantity </label>
                                 </div>
 
@@ -110,31 +111,33 @@
                                     <select name="unit" class="validate unit">
                                         <option value="" selected>Units</option>
                                         {% for unit in units %}
-                                        <option value="{{ unit.unit }}">{{ unit.unit}}</option>
+                                            {% if unit.unit == ingred.unit %}
+                                                <option value="{{ unit.unit }}" selected>{{ unit.unit }}</option>
+                                            {% else %} 
+                                                <option value="{{ unit.unit }}">{{ unit.unit}}</option>
+                                            {% endif %}
                                         {% endfor %}
                                     </select>
                                     <label for="unit">Units</label>
                                 </div>
-                                <div class="input-field col s9 l5">
+                                <div class="input-field col s10 l7">
                                     <i class="fas fa-carrot prefix grey-text text-darken-2"></i>
-                                    <input id="ingredient1" name="ingredients" type="text" placeholder="Ingredient" class="validate"
-                                        required>
+                                    <input id="ingredient1" value="{{ingred.ingredient}}" name="ingredients" type="text" placeholder="Ingredient" class="validate">
                                     <label for="ingredients">ingredients </label>
                                 </div>
-                                <div id="" class="btn green darken-2 col s2 addIngredient"><i class="fas fa-plus"></i></div>
+                                {% endfor %}
+                                <div id="" class="btn green darken-2 col s6 addIngredient"><i class="fas fa-plus"></i></div>
                             </div>
                         </div>
                         
                         <!-- copy of fieldGroup -->
                         <div class="row fieldGroupCopy" style="display: none;"></div>
                         
-                         
-                     <!---->  
                         <!-- preparation -->
                         <div id="stepList" class="press">
                             <div class="row fieldGroup">
                                 <h5 class="center padding10 grey darken-2 margin-bottom10 white-text">Preparation</h5>
-                                <div class="input-field col s9">
+                                <div class="input-field col s12">
                                 {% for step in recipe.steps %}
                                     <i class="fas fa-book-reader prefix grey-text text-darken-2"></i>
                                     <textarea id="step{{loop.index}}" name="steps" minlength="6" maxlength="300"  class="validate materialize-textarea">{{ step }}</textarea>
@@ -147,8 +150,7 @@
                         <div id="noteList">
                             <div class="row fieldGroup">
                                 <h5 class="center padding10 grey darken-2 margin-bottom10 white-text">Notes</h5>
-                                    <!--to do-->
-                                    <div class="input-field col s9">
+                                    <div class="input-field col s12">
                                     {% for note in recipe.notes %}
                                         <i class="fas fa-comment-dots prefix grey-text text-darken-2"></i>
                                         <textarea id="note{{loop.index}}" name="notes" minlength="8" maxlength="300" placeholder="note" class="validate materialize-textarea">{{note}}</textarea>

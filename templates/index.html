@@ -36,17 +36,19 @@
         <!-- last recipe -->
         <section>
             <div class="container">
-                <h3 class="header center orange-text text-darken-2">Latest Recipe</h3>
+                <h3 class="header center orange-text text-darken-2">Latest Recipes</h3>
                 <h5 class="header center light">Always more to discover</h5>
                 <br>
                 <div class="row">
                 {%  for latestRecipe in latestRecipes %}
                     <div class="col s12 m4">
-                        <div class="card my-medium hoverable">
+                        <div class="card hoverable">
                             <a class="grey-text text-darken-4" href="{{ url_for('view_recipe', recipe_id=latestRecipe._id) }}">
-                            <div class="card-image">
-                                <img src="{{ url_for('static', filename='images/'+latestRecipe.inputFile) }}">
-                                <span class="orange darken-2 card-title index-card-title card-category text-shadow">{{latestRecipe.category_name}}</span>
+                            <div class="box">
+                                <div class="content">
+                                    <img src="{{ url_for('static', filename='images/'+latestRecipe.inputFile) }}">
+                                </div>
+                                <span class="orange darken-2 white-text card-title card-cate text-shadow">{{latestRecipe.category_name}}</span>
                             </div>
                             <div class="card-content">
                                 <p>{{latestRecipe.recipe_name}}</p>
@@ -61,17 +63,19 @@
         <!-- inspired recipe -->
         <section>
             <div class="container">
-                <h3 class="header center orange-text text-darken-2">Asian Inspired Recipe</h3>
+                <h3 class="header center orange-text text-darken-2">Asian Inspired Recipes</h3>
                 <h5 class="header center light">Taste from around the world</h5>
                 <br>
                 <div class="row">
                 {%  for asianRecipe in asianRecipes %}
                     <div class="col s12 m4">
-                        <div class="card my-medium hoverable">
+                        <div class="card hoverable">
                             <a class="grey-text text-darken-4" href="{{ url_for('view_recipe', recipe_id=asianRecipe._id) }}">
-                            <div class="card-image">
-                                <img src="{{ url_for('static', filename='images/'+asianRecipe.inputFile) }}">
-                                <span class="orange darken-2 card-title index-card-title card-category text-shadow">{{asianRecipe.category_name}}</span>
+                            <div class="box">
+                                <div class="content">
+                                    <img src="{{ url_for('static', filename='images/'+ asianRecipe.inputFile) }}">
+                                </div>
+                                <span class="orange darken-2 white-text card-title card-cate text-shadow">{{asianRecipe.category_name}}</span>
                             </div>
                             <div class="card-content">
                                 <p>{{asianRecipe.recipe_name}}</p>
@@ -93,11 +97,13 @@
                 <div class="row">
                 {%  for breakBrunch in breakBrunches %}
                     <div class="col s12 m6 l3">
-                        <div class="card my-medium hoverable">
+                        <div class="card hoverable">
                             <a class="grey-text text-darken-4" href="{{ url_for('view_recipe', recipe_id=breakBrunch._id) }}">
-                            <div class="card-image">
-                                <img src="{{ url_for('static', filename='images/'+breakBrunch.inputFile) }}">
-                                <span class="orange darken-2 card-title index-card-title card-category text-shadow"><i class="fas fa-users"></i> &nbsp;{{breakBrunch.serving}}</span>
+                            <div class="box">
+                                <div class="content">
+                                    <img src="{{ url_for('static', filename='images/'+breakBrunch.inputFile) }}">
+                                </div>
+                                <span class="orange darken-2 white-text card-title card-cate text-shadow"><i class="fas fa-users"></i> &nbsp;{{breakBrunch.serving}}</span>
                             </div>
                             <div class="card-content">
                                 <p>{{breakBrunch.recipe_name}}</p>

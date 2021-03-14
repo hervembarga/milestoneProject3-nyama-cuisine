@@ -80,39 +80,21 @@ nav .input-field .search-icon{
 .strong{
    font-weight: bold; 
 }
-.card .card-image .card-category {
-  bottom: 5px;
-  left: 5px;
+.card-category {
+  font-size: 1.2rem;
+  font-weight: 600;
   max-width: 100%;
+  padding: 0.4rem;
+  border-radius: 5px;
+}
+.card-cate {
+  margin-left: 0.3rem;  
+  font-size: 1.2rem;
+  font-weight: 600;
   padding: 0.5rem;
   border-radius: 5px;
-  background-color: rgba(226, 65, 65,0.5);
 }
 
-.card.my-medium {
-  height: 280px;
-}
-.card.my-medium .card-action {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-}
-.card.my-medium .card-content {
-  max-height: 100%;
-  overflow: hidden;
-  padding-top: 0px;
-}
-.card.my-medium {
-  position: relative;
-}
-.card.my-medium .card-image {
-  max-height: 80%;
-  overflow: hidden;
-}
-.card.my-medium .card-image + .card-content {
-  max-height: 20%;
-}
 .margin-botton-0{
     margin-bottom: 0;
 }
@@ -126,6 +108,7 @@ nav .input-field .search-icon{
     font-size: 1rem;
     font-weight: 600;
 }
+
 .edit-del-btn {
     margin: 5px;
 }
@@ -140,13 +123,33 @@ nav .input-field .search-icon{
     display: inline;
 }
 
-.email-succes{
-     color: #ffd230;
-    background-color: #139D08;
-    border: 2px solid #d4ad00;
+/* card images same height*/
+.box {
+  position: relative;
+  z-index: 1;
+
 }
-.email-failed{
-     color: #ffd230;
-    background-color: red;
-    border: 2px solid #ffd230;
+.box:before {
+  content: "";
+  display: block;
+  padding-top: 80%;
+
+}
+
+.content {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background:rgb(90, 89, 89);
+  z-index: -1;
+}
+.content img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 60%;
+  position: absolute;
+  z-index: -2;
 }

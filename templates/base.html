@@ -17,8 +17,14 @@
     <header>
         <div class="add-recipe-social-top hide-on-med-and-down">
             <div class="col right">
+                {% if session.user %}
                 <a class="grey-text text-darken-4" href="{{url_for('suggest_recipe')}}"><i class="fas fa-drumstick-bite"></i>Suggest a Recipe</a>
-                <a class="grey-text text-darken-4" href="{{ url_for('profile', username=session['user']) }}"><i class="fas fa-user"></i> MY ACCOUNT</a>
+                <a class="grey-text text-darken-4" href="{{ url_for('profile', username=session['user']) }}"><i class="fas fa-user"></i> {{ session.user }}</a>
+                <a class="grey-text text-darken-4" href="{{ url_for('logout') }}"><i class="fas fa-sign-out-alt"></i></a>
+                {% else %}
+                <a class="grey-text text-darken-4" href="{{ url_for('login') }}"><i class="fas fa-drumstick-bite"></i>Suggest a Recipe</a>
+                <a class="grey-text text-darken-4" href="{{ url_for('login') }}"><i class="fas fa-user"></i> MY ACCOUNT</a>
+                {% endif %}
                 <a href="https://www.youtube.com/" target="_blank"><i class="red-text darken-2 fab fa-youtube-square youtube"></i></a>
                 <a href="https://www.facebook.com/" target="_blank"><i class="blue-text darken-2 fab fa-facebook-square facebook"></i></a>
                 <a href="https://www.instagram.com/" target="_blank"><i class="purple-text lighten-4 fab fa-instagram-square instagram"></i></a>
@@ -53,8 +59,14 @@
             
             <div class="grey lighten-3 div-menu-med nav-wrapper hide-on-large-only ">
                 <ul class="right uppercase inline">
-                    <li class="inline"><a class="grey-text text-darken-4" href="{{url_for('suggest_recipe')}}"><i class="fas fa-drumstick-bite"></i><span class="hide-on-med-and-down">Suggest a Recipe</span></a></li>
-                    <li><a class="grey-text text-darken-4" href="{{ url_for('profile', username=session['user']) }}"><i class="fas fa-user"></i> <span class="hide-on-med-and-down">MY ACCOUNT</span></a></li>
+                    {% if session.user %}
+                        <li class="inline"><a class="grey-text text-darken-4" href="{{url_for('suggest_recipe')}}"><i class="fas fa-drumstick-bite"></i><span class="hide-on-med-and-down">Suggest a Recipe</span></a></li>
+                        <li><a class="grey-text text-darken-4" href="{{ url_for('profile', username=session['user']) }}"><i class="fas fa-user"></i> <span class="hide-on-med-and-down">MY ACCOUNT</span></a></li>
+                        <li><a class="grey-text text-darken-4" href="{{ url_for('logout') }}"><i class="fas fa-sign-out-alt"></i></a></li>
+                    {% else %}
+                    <li class="inline"><a class="grey-text text-darken-4" href="{{url_for('login')}}"><i class="fas fa-drumstick-bite"></i><span class="hide-on-med-and-down">Suggest a Recipe</span></a></li>
+                    <li><a class="grey-text text-darken-4" href="{{ url_for('login') }}"><i class="fas fa-user"></i> <span class="hide-on-med-and-down">MY ACCOUNT</span></a></li>
+                    {% endif %}
                 </ul>
                 <form action="{{ url_for('search') }}" method="POST" class="menu-search-med">
                     <div class="input-field ">
