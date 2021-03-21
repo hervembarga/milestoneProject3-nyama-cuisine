@@ -87,6 +87,11 @@ nav .input-field .search-icon{
   padding: 0.4rem;
   border-radius: 5px;
 }
+.card .card-image .card-category {
+  left: 5px;
+  bottom: 5px;
+  border-radius: 5px;
+  background-color: rgba(196, 32, 32, 0.5);}
 .card-cate {
   margin-left: 0.3rem;  
   font-size: 1.2rem;
